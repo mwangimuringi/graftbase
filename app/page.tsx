@@ -1,8 +1,10 @@
 const Page = () => {
     return (
-        <div className="bg-yellow-400">
-            <h1 className="bg-slate-600">Home</h1>
-        </div>
+        <section className="flex-start flex-col mb-16">
+            <h1>Categories </h1>
+            <h1>Posts</h1>
+            <h1>LoadMore</h1>
+        </section>
     );
 }
 export default Page;

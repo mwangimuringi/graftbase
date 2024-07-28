@@ -17,12 +17,12 @@ const Navbar = () => {
           />
         </Link>
         <ul className='xl:flex hidden text-sm gap-7'>
-          {/* {
+          {
             NavLinks.map((link) = {
               <Link> {link.text}
               </Link>
             })
-          } */}
+          }
         </ul>
       </div>
 

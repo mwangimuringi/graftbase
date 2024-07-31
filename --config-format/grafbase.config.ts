@@ -1,5 +1,10 @@
 import { g, config, auth } from '@grafbase/sdk';
 
+const type  = {
+  model: any,
+  relation: Array<string>,
+};
+
 const User = g.model('User', {
   name: g.string().length({ min: 2, max: 20 }),
   email: g.string().unique(),

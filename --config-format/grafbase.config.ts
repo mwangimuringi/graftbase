@@ -1,5 +1,4 @@
-import { graph, config, g } from '@grafbase/sdk'
-import { Description } from '@headlessui/react'
+import { g, config, auth } from '@grafbase/sdk';
 
 const User = g.model('User', {
   name: g.string().length({ min: 2, max: 20 }),
@@ -9,8 +8,6 @@ const User = g.model('User', {
   githubUrl: g.url().optional(),
   linkedinUrl: g.url().optional(),
   projects: g.relation(() => Project).list().optional(),
-}).auth((rules) => {
-  rules.public().read()
 })
 
 const Project = g.model('Project', {
@@ -21,9 +18,6 @@ const Project = g.model('Project', {
   githubUrl: g.url(),
   category: g.string().search(),
   createdBy: g.relation(() => User),
-}).auth((rules) => {
-  rules.public().read()
-  rules.private().create().delete().update()
 })
 
 export default config({

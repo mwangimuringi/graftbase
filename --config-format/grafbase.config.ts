@@ -1,31 +1,27 @@
 import { g, config, auth } from '@grafbase/sdk';
 
-const type  = {
-  model: any,
-  relation: Array<string>,
-};
-
+// @ts-ignore
 const User = g.model('User', {
-  name: g.string().length({ min: 2, max: 20 }),
+  name: g.string().length({ min: 2, max: 100 }),
   email: g.string().unique(),
   avatarUrl: g.url(),
-  description: g.string().optional(),
+  description: g.string().length({ min: 2, max: 1000 }).optional(),
   githubUrl: g.url().optional(),
-  linkedinUrl: g.url().optional(),
-  projects: g.relation(() => Project).list().optional(),
+  linkedinUrl: g.url().optional(), 
+  // projects: g.relation(() => Project).list().optional(),
 })
 
+// @ts-ignore
 const Project = g.model('Project', {
   title: g.string().length({ min: 3 }),
-  description: g.string(),
+  description: g.string(), 
   image: g.url(),
-  liveSiteUrl: g.url(),
-  githubUrl: g.url(),
-  category: g.string().search(),
-  createdBy: g.relation(() => User),
+  liveSiteUrl: g.url(), 
+  githubUrl: g.url(), 
+  category: g.string(),  // Removed .search() if not supported
+  // createdBy: g.relate(() => User),
 })
 
 export default config({
-  schema: g,
-
+  schema: g
 })

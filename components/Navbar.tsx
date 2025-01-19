@@ -39,7 +39,7 @@ const Navbar = () => {
             />
             <Link
               href="/create-project"
-              className="text-sm px-4 py-2 rounded-lg bg-primary text-white"
+              className="hidden sm:block text-sm px-4 py-2 rounded-lg bg-primary text-white"
             >
               Create Project
             </Link>

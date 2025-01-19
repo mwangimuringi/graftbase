@@ -5,7 +5,12 @@ import { NavLinks } from '@/constants';
 import AuthProviders from './AuthProviders';
 
 const Navbar = () => {
-  const session = null;
+  const session = {
+    user: {
+      name: 'John Doe',
+      photo: '/user-photo.jpg',
+    },
+  };
 
   return (
     <nav className="flexBetween navbar">
@@ -25,7 +30,13 @@ const Navbar = () => {
       <div className="flexCenter gap-4">
         {session ? (
           <>
-            <div className="user-photo">UserPhoto</div>
+            <Image
+              src={session.user.photo}
+              alt={session.user.name}
+              width={40}
+              height={40}
+              className="rounded-full"
+            />
             <Link
               href="/create-project"
               className="text-sm px-4 py-2 rounded-lg bg-primary text-white"

@@ -1,14 +1,14 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import React from 'react';
-import { NavLinks } from '@/constants';
-import AuthProviders from './AuthProviders';
+import Image from "next/image";
+import Link from "next/link";
+import React from "react";
+import { NavLinks } from "@/constants";
+import AuthProviders from "./AuthProviders";
 
 const Navbar = () => {
   const session = {
     user: {
-      name: 'John Doe',
-      photo: '/user-photo.jpg',
+      name: "John Doe",
+      photo: "/user-photo.jpg",
     },
   };
 
@@ -31,8 +31,8 @@ const Navbar = () => {
         {session ? (
           <>
             <Image
-              src={session.user.photo}
-              alt={session.user.name}
+              src={session.user.photo || "/default-photo.jpg"}
+              alt={session.user.name || "User"}
               width={40}
               height={40}
               className="rounded-full"

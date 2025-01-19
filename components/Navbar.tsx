@@ -25,8 +25,13 @@ const Navbar = () => {
       <div className="flexCenter gap-4">
         {session ? (
           <>
-            UserPhoto
-            <Link href="/create-project">Create Project</Link>
+            <div className="user-photo">UserPhoto</div>
+            <Link
+              href="/create-project"
+              className="text-sm px-4 py-2 rounded-lg bg-primary text-white"
+            >
+              Create Project
+            </Link>
           </>
         ) : (
           <AuthProviders />

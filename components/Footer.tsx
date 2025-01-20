@@ -74,7 +74,12 @@ const Footer = () => (
 
         <FooterColumn
           title={footerLinks[6].title}
-          links={footerLinks[6].links}
+          <div className="flex flex-wrap gap-12">
+    {footerLinks.map(({ title, links }, index) => (
+        <FooterColumn key={index} title={title} links={links} />
+    ))}
+</div>
+
         />
       </div>
     </div>

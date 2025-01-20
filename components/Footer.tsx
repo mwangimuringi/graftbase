@@ -23,12 +23,8 @@ const FooterColumn = ({ title, links }: ColumnProps) => (
 );
 
 const Footer = () => (
-    <section className="flexStart footer flex-wrap">
-    <div className="w-full sm:w-auto flex flex-col gap-12">
-        <!-- Content remains the same -->
-    </div>
-</section>
-
+  <section className="flexStart footer">
+    <div className="flex flex-col gap-12 w-full">
       <div className="flex items-start flex-col">
         <Image
           src="/logo-purple.svg"

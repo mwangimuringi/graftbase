@@ -75,6 +75,10 @@ const Footer = () => {
                 <a href="https://github.com/flexible-inc" target="_blank" rel="noopener noreferrer">
                     <Image
                         src="/icons/github.svg"
+                        width={24}
+                        height={24}
+                        alt="GitHub logo"
+                    />
         </section>
     );
 };

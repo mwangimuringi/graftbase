@@ -94,6 +94,13 @@ const Footer = () => {
                 <p className="text-gray">
                     <span className="text-black font-semibold">10,214</span> {projectsSubmitted}
                 </p>
+                <div className="flex flex-col gap-4">
+                    <p className="text-gray text-sm">
+                        <span className="text-black font-semibold">10,214</span> {projectsSubmitted}
+                    </p>
+                    <p className="text-gray text-sm">
+                        <span className="text-black font-semibold">10,214</span> {projectsSubmitted}
+                    </p>
             </div>
         </section>
     );

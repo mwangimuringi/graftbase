@@ -89,6 +89,7 @@ const Footer = () => {
                     />
                 </a>
             </div>
+            <div className="footer-copyright"></div>
         </section>
     );
 };

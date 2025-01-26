@@ -89,7 +89,12 @@ const Footer = () => {
                     />
                 </a>
             </div>
-            <div className="footer-copyright"></div>
+            <div className="footer-copyright">
+                <p>{copyright}</p>     
+                <p className="text-gray">
+                    <span className="text-black font-semibold">10,214</span> {projectsSubmitted}
+                </p>
+            </div>
         </section>
     );
 };

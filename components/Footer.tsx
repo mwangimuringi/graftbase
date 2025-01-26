@@ -79,6 +79,16 @@ const Footer = () => {
                         height={24}
                         alt="GitHub logo"
                     />
+                    </a>
+                <a href="https://www.instagram.com/flexible_inc/" target="_blank" rel="noopener noreferrer">
+                    <Image
+                        src="/icons/instagram.svg"
+                        width={24}
+                        height={24}
+                        alt="Instagram logo"
+                    />
+                </a>
+            </div>
         </section>
     );
 };

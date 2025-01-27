@@ -1,21 +1,20 @@
-import { footerLinks } from "@/constants";
+import Image from "next/image";
 
-const Footer = () => {
-    return (
-        <section className="flexStart footer flex-wrap">
-            <div className="flex flex-col gap-12 w-full">
-                <div className="flex items-start flex-col">
-                    <div className="brand-placeholder" />
-                    <p className="text-start text-sm font-normal mt-5 max-w-xs">
-                        Footer description goes here.
-                    </p>
-                </div>
-                <div className="flex flex-wrap gap-12">
-                    {footerLinks.map(({ title, links }, index) => (
-                        <FooterColumn key={index} title={title} links={links} />
-                    ))}
-                </div>
-            </div>
-        </section>
-    );
-};
+const FooterSocials = () => (
+    <div className="footer-socials">
+        <a href="https://www.linkedin.com/company/flexible-inc/" target="_blank" rel="noopener noreferrer">
+            <Image src="/icons/linkedin.svg" width={24} height={24} alt="LinkedIn logo" />
+        </a>
+        <a href="https://twitter.com/flexible_inc" target="_blank" rel="noopener noreferrer">
+            <Image src="/icons/twitter.svg" width={24} height={24} alt="Twitter logo" />
+        </a>
+        <a href="https://github.com/flexible-inc" target="_blank" rel="noopener noreferrer">
+            <Image src="/icons/github.svg" width={24} height={24} alt="GitHub logo" />
+        </a>
+        <a href="https://www.instagram.com/flexible_inc/" target="_blank" rel="noopener noreferrer">
+            <Image src="/icons/instagram.svg" width={24} height={24} alt="Instagram logo" />
+        </a>
+    </div>
+);
+
+export default FooterSocials;

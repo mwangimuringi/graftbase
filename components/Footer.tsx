@@ -21,6 +21,24 @@ const FooterColumn = ({ title, links }: ColumnProps) => (
         </ul>
     </div>
 );
+const [error, setError] = useState(null);
+
+const getRandomProducts = async () => {
+  try {
+    const response = await fetch('/api/products/get-random');
+    const result = await response.json();
+
+    if (result) {
+      setProducts(result);
+      return;
+    }
+
+    setProducts([]);
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    setError("Failed to load products. Please try again later.");
+  }
+};
 
 const FooterColumn = ({ title, links }: ColumnProps) => (
     <div className="footer_column">

@@ -35,11 +35,6 @@ const getRandomProducts = async () => {
     const response = await fetch('/api/products/get-random');
     const result = await response.json();
 
-    if (result) {
-      setProducts(result);
-      return;
-    }
-
     setProducts([]);
   } catch (error) {
     console.error("Error fetching products:", error);

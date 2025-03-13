@@ -7,13 +7,6 @@ type ColumnProps = {
     links: Array<string>;
 };
 
-const getRandomProducts = async () => {
-  try {
-    const response = await fetch('/api/products/get-random');
-    const result = await response.json();
-
-};
-
 const FooterColumn = ({ title, links }: ColumnProps) => (
     <div className="footer_column">
         <h4 className="font-semibold">{title}</h4>

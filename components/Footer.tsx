@@ -12,11 +12,6 @@ const getRandomProducts = async () => {
     const response = await fetch('/api/products/get-random');
     const result = await response.json();
 
-    setProducts([]);
-  } catch (error) {
-    console.error("Error fetching products:", error);
-    setError("Failed to load products. Please try again later.");
-  }
 };
 
 const FooterColumn = ({ title, links }: ColumnProps) => (

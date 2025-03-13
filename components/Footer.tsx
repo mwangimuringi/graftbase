@@ -30,8 +30,6 @@ const getRandomProducts = async () => {
 
 const [error, setError] = useState(null);
 
-  }, []);
-  
 const getRandomProducts = async () => {
   try {
     const response = await fetch('/api/products/get-random');

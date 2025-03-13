@@ -7,29 +7,6 @@ type ColumnProps = {
     links: Array<string>;
 };
 
-const [loading, setLoading] = useState(true);
-
-const getRandomProducts = async () => {
-  try {
-    setLoading(true);
-    const response = await fetch('/api/products/get-random');
-    const result = await response.json();
-
-    if (result) {
-      setProducts(result);
-    } else {
-      setProducts([]);
-    }
-  } catch (error) {
-    console.error("Error fetching products:", error);
-    setError("Failed to load products.");
-  } finally {
-    setLoading(false);
-  }
-};
-
-const [error, setError] = useState(null);
-
 const getRandomProducts = async () => {
   try {
     const response = await fetch('/api/products/get-random');

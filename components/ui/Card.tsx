@@ -6,6 +6,8 @@ interface CardProps {
   header?: React.ReactNode;
   footer?: React.ReactNode;
   variant?: "default" | "outlined" | "shadow";
+  size?: "small" | "medium" | "large";
+  hoverEffect?: boolean;
 }
 
 const variantClasses = {
@@ -14,14 +16,26 @@ const variantClasses = {
   shadow: "bg-white shadow-lg",
 };
 
+const sizeClasses = {
+  small: "p-2 text-sm",
+  medium: "p-4 text-base",
+  large: "p-6 text-lg",
+};
+
 const Card: React.FC<CardProps> = ({
   children,
   header,
   footer,
   variant = "default",
+  size = "medium",
+  hoverEffect = false,
 }) => {
   return (
-    <div className={`rounded-lg p-4 ${variantClasses[variant]}`}>
+    <div
+      className={`rounded-lg ${variantClasses[variant]} ${sizeClasses[size]} ${
+        hoverEffect ? "transition-transform transform hover:scale-105" : ""
+      }`}
+    >
       {header && (
         <div className="border-b pb-2 mb-3 font-semibold">{header}</div>
       )}

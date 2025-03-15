@@ -1,13 +1,24 @@
-// /components/ui/Modal.tsx
 import React, { useEffect, useState } from "react";
 
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;
+  size?: "small" | "medium" | "large";
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
+const sizeClasses = {
+  small: "w-1/4",
+  medium: "w-1/2",
+  large: "w-3/4",
+};
+
+const Modal: React.FC<ModalProps> = ({
+  isOpen,
+  onClose,
+  children,
+  size = "medium",
+}) => {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
@@ -44,7 +55,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
       <div
         className={`bg-white p-6 rounded-lg shadow-lg transform transition-all ${
           isOpen ? "scale-100" : "scale-90"
-        }`}
+        } ${sizeClasses[size]}`}
         onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside
       >
         <button

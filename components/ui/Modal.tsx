@@ -13,10 +13,22 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
   useEffect(() => {
     if (isOpen) {
       setShow(true);
+      document.body.style.overflow = "hidden"; // Prevent scrolling when modal is open
     } else {
-      setTimeout(() => setShow(false), 300); // Delay closing for animation
+      setTimeout(() => setShow(false), 300);
+      document.body.style.overflow = "auto"; // Restore scrolling
     }
   }, [isOpen]);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape" && isOpen) {
+        onClose();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen, onClose]);
 
   if (!show) return null;
 
@@ -26,6 +38,8 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
         isOpen ? "opacity-100" : "opacity-0"
       }`}
       onClick={onClose}
+      role="dialog"
+      aria-modal="true"
     >
       <div
         className={`bg-white p-6 rounded-lg shadow-lg transform transition-all ${
@@ -36,6 +50,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
         <button
           onClick={onClose}
           className="absolute top-2 right-2 text-gray-600"
+          aria-label="Close modal"
         >
           ✖
         </button>

@@ -4,20 +4,24 @@ import Image from "next/image";
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
 
   return (
-    <header className="bg-gray-800 text-white p-4 flex justify-between items-center">
+    <header
+      className={`p-4 flex justify-between items-center ${
+        darkMode ? "bg-gray-900 text-white" : "bg-gray-200 text-black"
+      }`}
+    >
       <h1 className="text-xl font-semibold">My App</h1>
-      <button
-        className="md:hidden block text-white"
-        onClick={() => setIsOpen(!isOpen)}
-      >
+      <button className="md:hidden block" onClick={() => setIsOpen(!isOpen)}>
         ☰
       </button>
       <nav
         className={`md:flex gap-4 ${
           isOpen ? "block" : "hidden"
-        } absolute md:static bg-gray-800 top-16 right-4 p-4 rounded-md`}
+        } absolute md:static ${
+          darkMode ? "bg-gray-900" : "bg-gray-200"
+        } top-16 right-4 p-4 rounded-md`}
       >
         <ul className="flex flex-col md:flex-row md:gap-4">
           <li>
@@ -37,7 +41,13 @@ const Header: React.FC = () => {
           </li>
         </ul>
       </nav>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-4">
+        <button
+          className="p-2 rounded-md border"
+          onClick={() => setDarkMode(!darkMode)}
+        >
+          {darkMode ? "🌞" : "🌙"}
+        </button>
         <Image
           src="/avatar.png"
           alt="User Avatar"
@@ -45,7 +55,6 @@ const Header: React.FC = () => {
           height={32}
           className="rounded-full"
         />
-        <span className="hidden md:inline-block">John Doe</span>
       </div>
     </header>
   );

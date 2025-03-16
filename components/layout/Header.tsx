@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -36,6 +37,16 @@ const Header: React.FC = () => {
           </li>
         </ul>
       </nav>
+      <div className="flex items-center gap-2">
+        <Image
+          src="/avatar.png"
+          alt="User Avatar"
+          width={32}
+          height={32}
+          className="rounded-full"
+        />
+        <span className="hidden md:inline-block">John Doe</span>
+      </div>
     </header>
   );
 };

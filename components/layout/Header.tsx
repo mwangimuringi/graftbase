@@ -1,12 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 
 const Header: React.FC = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <header className="bg-gray-800 text-white p-4 flex justify-between items-center">
       <h1 className="text-xl font-semibold">My App</h1>
-      <nav>
-        <ul className="flex gap-4">
+      <button
+        className="md:hidden block text-white"
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        ☰
+      </button>
+      <nav
+        className={`md:flex gap-4 ${
+          isOpen ? "block" : "hidden"
+        } absolute md:static bg-gray-800 top-16 right-4 p-4 rounded-md`}
+      >
+        <ul className="flex flex-col md:flex-row md:gap-4">
           <li>
             <Link href="/" className="hover:underline">
               Home

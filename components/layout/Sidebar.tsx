@@ -9,8 +9,10 @@ const Sidebar: React.FC = () => {
       className={`h-screen bg-gray-800 text-white p-4 transition-all ${
         isOpen ? "w-64" : "w-16"
       }`}
+      aria-label="Sidebar"
     >
       <button
+        aria-label={isOpen ? "Collapse Sidebar" : "Expand Sidebar"}
         className="mb-4 p-2 bg-gray-700 rounded"
         onClick={() => setIsOpen(!isOpen)}
       >

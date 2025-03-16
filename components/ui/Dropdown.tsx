@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 
 interface DropdownProps {
-  options: string[];
+  options: { label: string; icon?: React.ReactNode; disabled?: boolean }[];
   onSelect: (option: string) => void;
   position?: "left" | "right";
   className?: string;
+  disabled?: boolean;
 }
 
 const Dropdown: React.FC<DropdownProps> = ({
@@ -12,11 +13,13 @@ const Dropdown: React.FC<DropdownProps> = ({
   onSelect,
   position = "left",
   className,
+  disabled = false,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState<string | null>(null);
 
-  const handleSelect = (option: string) => {
+  const handleSelect = (option: string, isDisabled: boolean) => {
+    if (isDisabled) return;
     setSelected(option);
     onSelect(option);
     setIsOpen(false);
@@ -25,8 +28,11 @@ const Dropdown: React.FC<DropdownProps> = ({
   return (
     <div className={`relative ${className}`}>
       <button
-        className="bg-gray-200 px-4 py-2 rounded-md"
-        onClick={() => setIsOpen(!isOpen)}
+        className={`px-4 py-2 rounded-md ${
+          disabled ? "bg-gray-300 cursor-not-allowed" : "bg-gray-200"
+        }`}
+        onClick={() => !disabled && setIsOpen(!isOpen)}
+        disabled={disabled}
       >
         {selected || "Select an option"}
       </button>
@@ -36,13 +42,18 @@ const Dropdown: React.FC<DropdownProps> = ({
             position === "right" ? "right-0" : "left-0"
           }`}
         >
-          {options.map((option) => (
+          {options.map(({ label, icon, disabled }) => (
             <li
-              key={option}
-              className="px-4 py-2 cursor-pointer hover:bg-gray-100"
-              onClick={() => handleSelect(option)}
+              key={label}
+              className={`flex items-center px-4 py-2 cursor-pointer ${
+                disabled
+                  ? "text-gray-400 cursor-not-allowed"
+                  : "hover:bg-gray-100"
+              }`}
+              onClick={() => handleSelect(label, !!disabled)}
             >
-              {option}
+              {icon && <span className="mr-2">{icon}</span>}
+              {label}
             </li>
           ))}
         </ul>

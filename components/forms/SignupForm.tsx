@@ -28,26 +28,41 @@ const SignupForm: React.FC = () => {
           {error}
         </p>
       )}
+      <label htmlFor="username" className="block font-medium">
+        Username
+      </label>
       <input
+        id="username"
         type="text"
-        placeholder="Username"
+        placeholder="Enter your username"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
         className="border p-2 w-full rounded mb-2"
+        aria-required="true"
       />
+      <label htmlFor="email" className="block font-medium">
+        Email
+      </label>
       <input
+        id="email"
         type="email"
-        placeholder="Email"
+        placeholder="Enter your email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         className="border p-2 w-full rounded mb-2"
+        aria-required="true"
       />
+      <label htmlFor="password" className="block font-medium">
+        Password
+      </label>
       <input
+        id="password"
         type="password"
-        placeholder="Password"
+        placeholder="Enter your password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         className="border p-2 w-full rounded mb-2"
+        aria-required="true"
       />
       <button
         type="submit"

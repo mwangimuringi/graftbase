@@ -3,17 +3,30 @@ import Link from "next/link";
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
 
   return (
-    <nav className="bg-gray-800 text-white p-4">
+    <nav
+      className={`p-4 ${
+        darkMode ? "bg-gray-900 text-white" : "bg-gray-200 text-black"
+      }`}
+    >
       <div className="flex justify-between items-center">
         <h1 className="text-lg font-semibold">My App</h1>
-        <button
-          className="md:hidden p-2 bg-gray-700 rounded"
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          {isOpen ? "✖" : "☰"}
-        </button>
+        <div className="flex items-center space-x-4">
+          <button
+            className="md:hidden p-2 bg-gray-700 rounded"
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            {isOpen ? "✖" : "☰"}
+          </button>
+          <button
+            className="p-2 bg-gray-700 rounded"
+            onClick={() => setDarkMode(!darkMode)}
+          >
+            {darkMode ? "🌞" : "🌙"}
+          </button>
+        </div>
       </div>
       <div
         className={`mt-4 space-y-2 ${

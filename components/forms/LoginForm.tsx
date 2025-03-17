@@ -4,8 +4,13 @@ const LoginForm: React.FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("Logging in with:", { username, password });
+  };
+
   return (
-    <form className="p-4 bg-white shadow-md rounded-lg">
+    <form onSubmit={handleSubmit} className="p-4 bg-white shadow-md rounded-lg">
       <h2 className="text-lg font-semibold mb-4">Login</h2>
       <input
         type="text"

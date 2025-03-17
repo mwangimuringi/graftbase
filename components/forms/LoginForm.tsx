@@ -18,20 +18,34 @@ const LoginForm: React.FC = () => {
   return (
     <form onSubmit={handleSubmit} className="p-4 bg-white shadow-md rounded-lg">
       <h2 className="text-lg font-semibold mb-4">Login</h2>
-      {error && <p className="text-red-500">{error}</p>}
+      {error && (
+        <p className="text-red-500" role="alert">
+          {error}
+        </p>
+      )}
+      <label htmlFor="username" className="block font-medium">
+        Username
+      </label>
       <input
+        id="username"
         type="text"
-        placeholder="Username"
+        placeholder="Enter your username"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
         className="border p-2 w-full rounded mb-2"
+        aria-required="true"
       />
+      <label htmlFor="password" className="block font-medium">
+        Password
+      </label>
       <input
+        id="password"
         type="password"
-        placeholder="Password"
+        placeholder="Enter your password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         className="border p-2 w-full rounded mb-2"
+        aria-required="true"
       />
       <button
         type="submit"

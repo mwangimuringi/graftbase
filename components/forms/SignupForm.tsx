@@ -5,8 +5,13 @@ const SignupForm: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("Signing up with:", { username, email, password });
+  };
+
   return (
-    <form className="p-4 bg-white shadow-md rounded-lg">
+    <form onSubmit={handleSubmit} className="p-4 bg-white shadow-md rounded-lg">
       <h2 className="text-lg font-semibold mb-4">Sign Up</h2>
       <input
         type="text"

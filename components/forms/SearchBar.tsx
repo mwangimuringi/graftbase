@@ -19,10 +19,13 @@ const SearchBar: React.FC = () => {
         placeholder="Search..."
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        className="border p-2 w-full rounded"
+        className="border p-2 w-full rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
         aria-label="Search"
       />
-      <button type="submit" className="bg-blue-500 text-white p-2 rounded">
+      <button
+        type="submit"
+        className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600 transition"
+      >
         Search
       </button>
     </form>

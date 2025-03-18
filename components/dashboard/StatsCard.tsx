@@ -17,10 +17,16 @@ const StatsCard: React.FC<StatsCardProps> = ({
   Icon,
 }) => {
   return (
-    <div className={`${bgColor} shadow-md rounded-lg p-4 flex items-center`}>
-      {Icon && <Icon className="text-3xl mr-3" />}
+    <div
+      className={`${bgColor} shadow-md rounded-lg p-4 flex items-center`}
+      role="region"
+      aria-labelledby={`stats-title-${title}`}
+    >
+      {Icon && <Icon className="text-3xl mr-3" aria-hidden="true" />}
       <div>
-        <h3 className="text-gray-600 text-sm">{title}</h3>
+        <h3 id={`stats-title-${title}`} className="text-gray-600 text-sm">
+          {title}
+        </h3>
         <p className={`text-2xl font-bold ${textColor}`}>{value}</p>
       </div>
     </div>

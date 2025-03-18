@@ -1,5 +1,5 @@
 // /components/modals/SettingsModal.tsx
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 
 interface SettingsModalProps {
@@ -8,6 +8,9 @@ interface SettingsModalProps {
 }
 
 const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose }) => {
+  const [darkMode, setDarkMode] = useState(false);
+  const [notifications, setNotifications] = useState(true);
+
   if (!isOpen) return null;
 
   return (
@@ -24,7 +27,24 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose }) => {
         onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside modal
       >
         <h2 className="text-xl font-semibold">Settings</h2>
-        <p className="text-gray-600 mt-2">Modify your preferences here.</p>
+        <div className="mt-4">
+          <label className="flex justify-between items-center">
+            <span>Dark Mode</span>
+            <input
+              type="checkbox"
+              checked={darkMode}
+              onChange={() => setDarkMode(!darkMode)}
+            />
+          </label>
+          <label className="flex justify-between items-center mt-2">
+            <span>Enable Notifications</span>
+            <input
+              type="checkbox"
+              checked={notifications}
+              onChange={() => setNotifications(!notifications)}
+            />
+          </label>
+        </div>
         <div className="flex justify-end mt-4">
           <button className="px-4 py-2 bg-gray-300 rounded" onClick={onClose}>
             Close

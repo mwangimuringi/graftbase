@@ -1,7 +1,17 @@
 // /components/dashboard/UserTable.tsx
 import React from "react";
 
-const UserTable: React.FC = () => {
+interface User {
+  id: number;
+  name: string;
+  email: string;
+}
+
+interface UserTableProps {
+  users: User[];
+}
+
+const UserTable: React.FC<UserTableProps> = ({ users }) => {
   return (
     <table className="min-w-full border border-gray-300">
       <thead>
@@ -11,10 +21,12 @@ const UserTable: React.FC = () => {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td className="border px-4 py-2">John Doe</td>
-          <td className="border px-4 py-2">john@example.com</td>
-        </tr>
+        {users.map((user) => (
+          <tr key={user.id}>
+            <td className="border px-4 py-2">{user.name}</td>
+            <td className="border px-4 py-2">{user.email}</td>
+          </tr>
+        ))}
       </tbody>
     </table>
   );

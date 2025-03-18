@@ -21,6 +21,7 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({
       role="dialog"
       aria-labelledby="confirm-modal-title"
       aria-modal="true"
+      onClick={onClose}
     >
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
@@ -28,6 +29,7 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({
         exit={{ opacity: 0, scale: 0.9 }}
         transition={{ duration: 0.2 }}
         className="bg-white p-6 rounded-lg shadow-lg"
+        onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside modal
       >
         <p id="confirm-modal-title" className="text-lg">
           Are you sure?

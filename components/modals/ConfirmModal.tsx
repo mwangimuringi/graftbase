@@ -1,5 +1,6 @@
 // /components/modals/ConfirmModal.tsx
 import React from "react";
+import { motion } from "framer-motion";
 
 interface ConfirmModalProps {
   isOpen: boolean;
@@ -16,7 +17,13 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="bg-white p-6 rounded-lg shadow-lg">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.9 }}
+        transition={{ duration: 0.2 }}
+        className="bg-white p-6 rounded-lg shadow-lg"
+      >
         <p className="text-lg">Are you sure?</p>
         <div className="flex justify-end mt-4">
           <button
@@ -32,7 +39,7 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({
             Confirm
           </button>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };

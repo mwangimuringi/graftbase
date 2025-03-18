@@ -1,3 +1,4 @@
+// /components/dashboard/StatsCard.tsx
 import React from "react";
 import { IconType } from "react-icons";
 
@@ -18,7 +19,7 @@ const StatsCard: React.FC<StatsCardProps> = ({
 }) => {
   return (
     <div
-      className={`${bgColor} shadow-md rounded-lg p-4 flex items-center sm:flex-col sm:items-start`}
+      className={`${bgColor} shadow-md rounded-lg p-4 flex items-center sm:flex-col sm:items-start transition transform hover:scale-105 hover:shadow-lg`}
       role="region"
       aria-labelledby={`stats-title-${title}`}
     >

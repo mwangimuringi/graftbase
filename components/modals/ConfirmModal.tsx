@@ -6,12 +6,16 @@ interface ConfirmModalProps {
   isOpen: boolean;
   onClose: () => void;
   onConfirm: () => void;
+  title?: string;
+  message?: string;
 }
 
 const ConfirmModal: React.FC<ConfirmModalProps> = ({
   isOpen,
   onClose,
   onConfirm,
+  title = "Are you sure?",
+  message = "This action cannot be undone.",
 }) => {
   if (!isOpen) return null;
 
@@ -31,9 +35,10 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({
         className="bg-white p-6 rounded-lg shadow-lg"
         onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside modal
       >
-        <p id="confirm-modal-title" className="text-lg">
-          Are you sure?
+        <p id="confirm-modal-title" className="text-lg font-semibold">
+          {title}
         </p>
+        <p className="text-sm text-gray-600 mt-2">{message}</p>
         <div className="flex justify-end mt-4">
           <button
             className="px-4 py-2 mr-2 bg-gray-300 rounded"

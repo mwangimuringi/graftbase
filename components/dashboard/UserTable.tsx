@@ -21,10 +21,10 @@ const UserTable: React.FC<UserTableProps> = ({ users }) => {
         </tr>
       </thead>
       <tbody>
-        {users.map((user) => (
-          <tr key={user.id}>
-            <td className="border px-4 py-2">{user.name}</td>
-            <td className="border px-4 py-2">{user.email}</td>
+        {users.map((user, index) => (
+          <tr key={user.id} className={index % 2 === 0 ? "bg-gray-50" : ""}>
+            <td className="border px-4 py-2 hover:bg-gray-200">{user.name}</td>
+            <td className="border px-4 py-2 hover:bg-gray-200">{user.email}</td>
           </tr>
         ))}
       </tbody>

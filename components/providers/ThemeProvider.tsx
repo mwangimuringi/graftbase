@@ -19,8 +19,10 @@ export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) =
   const [theme, setTheme] = useState<Theme>(getInitialTheme);
 
   useEffect(() => {
+    document.body.classList.add("theme-transition");
     document.body.classList.toggle("dark", theme === "dark");
     localStorage.setItem("theme", theme);
+    setTimeout(() => document.body.classList.remove("theme-transition"), 300);
   }, [theme]);
 
   const toggleTheme = () => {
@@ -41,3 +43,8 @@ export const useTheme = () => {
   }
   return context;
 };
+
+// Add this CSS somewhere in your global styles
+// .theme-transition {
+//   transition: background-color 0.3s, color 0.3s;
+// }

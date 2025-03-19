@@ -10,9 +10,13 @@ interface ThemeContextProps {
 const ThemeContext = createContext<ThemeContextProps | undefined>(undefined);
 
 export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [theme, setTheme] = useState<Theme>(() => {
-    return (localStorage.getItem("theme") as Theme) || "light";
-  });
+  const getInitialTheme = (): Theme => {
+    const storedTheme = localStorage.getItem("theme") as Theme | null;
+    if (storedTheme) return storedTheme;
+    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  };
+
+  const [theme, setTheme] = useState<Theme>(getInitialTheme);
 
   useEffect(() => {
     document.body.classList.toggle("dark", theme === "dark");

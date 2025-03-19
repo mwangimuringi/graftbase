@@ -1,36 +1,46 @@
 // /components/providers/ThemeProvider.tsx
-import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+} from "react";
 
 type Theme = "light" | "dark";
 interface ThemeContextProps {
   theme: Theme;
   toggleTheme: () => void;
+  isDarkMode: boolean;
 }
 
 const ThemeContext = createContext<ThemeContextProps | undefined>(undefined);
 
-export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const ThemeProvider: React.FC<{ children: ReactNode }> = ({
+  children,
+}) => {
   const getInitialTheme = (): Theme => {
     const storedTheme = localStorage.getItem("theme") as Theme | null;
     if (storedTheme) return storedTheme;
-    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
   };
 
   const [theme, setTheme] = useState<Theme>(getInitialTheme);
+  const isDarkMode = theme === "dark";
 
   useEffect(() => {
-    document.body.classList.add("theme-transition");
-    document.body.classList.toggle("dark", theme === "dark");
+    document.body.classList.toggle("dark", isDarkMode);
     localStorage.setItem("theme", theme);
-    setTimeout(() => document.body.classList.remove("theme-transition"), 300);
-  }, [theme]);
+  }, [theme, isDarkMode]);
 
   const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+    setTheme(isDarkMode ? "light" : "dark");
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider value={{ theme, toggleTheme, isDarkMode }}>
       {children}
     </ThemeContext.Provider>
   );
@@ -43,8 +53,3 @@ export const useTheme = () => {
   }
   return context;
 };
-
-// Add this CSS somewhere in your global styles
-// .theme-transition {
-//   transition: background-color 0.3s, color 0.3s;
-// }

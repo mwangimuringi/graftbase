@@ -13,9 +13,9 @@ const UserIcon: React.FC<UserIconProps> = ({ color = "gray", size = 24 }) => {
       viewBox="0 0 24 24"
       width={size}
       height={size}
-      className="w-auto h-auto"
+      className="w-auto h-auto transition-colors duration-200 hover:text-blue-500"
       fill="none"
-      stroke={color}
+      stroke="currentColor"
       strokeWidth="2"
       role="img"
       aria-label="User profile icon"

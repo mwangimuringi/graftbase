@@ -26,16 +26,7 @@ const Logo: React.FC<LogoProps> = ({ color = "black", size = 48 }) => {
         strokeWidth="5"
         fill="none"
       />
-      <text
-        x="50%"
-        y="55%"
-        textAnchor="middle"
-        fontSize="24"
-        fill={color}
-        aria-hidden="true"
-      >
-        GB
-      </text>
+      <rect x="40" y="40" width="20" height="20" fill={color} />
     </svg>
   );
 };

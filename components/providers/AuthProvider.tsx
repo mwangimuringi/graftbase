@@ -1,3 +1,6 @@
+import { User } from "next-auth";
+import { ReactNode, useState } from "react";
+
 // /components/providers/AuthProvider.tsx
 interface AuthContextProps {
     user: User | null;
@@ -5,6 +8,25 @@ interface AuthContextProps {
     logout: () => void;
     loading: boolean;
   }
+
+  useEffect(() => {
+    const restoreSession = async () => {
+      setLoading(true);
+      try {
+        const response = await fetch("/api/auth/session");
+        const data = await response.json();
+        if (response.ok) {
+          setUser(data.user);
+        }
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+  
+    restoreSession();
+  }, []);  
   
   export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [user, setUser] = useState<User | null>(null);
@@ -30,4 +52,8 @@ interface AuthContextProps {
       </AuthContextProvider>
     );
   };
+
+function useEffect(arg0: () => void, arg1: never[]) {
+    throw new Error("Function not implemented.");
+}
   

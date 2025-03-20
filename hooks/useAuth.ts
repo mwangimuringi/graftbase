@@ -1,7 +1,13 @@
 import { useState, useEffect } from "react";
 
+interface User {
+  id: string;
+  name: string;
+  email: string;
+}
+
 const useAuth = () => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
@@ -14,8 +20,7 @@ const useAuth = () => {
     }
   }, []);
 
-  const login = (userData: object, sessionDuration = 3600000) => {
-    // Default: 1 hour
+  const login = (userData: User, sessionDuration = 3600000) => { // Default: 1 hour
     setUser(userData);
     localStorage.setItem("user", JSON.stringify(userData));
     localStorage.setItem("expiry", (Date.now() + sessionDuration).toString());

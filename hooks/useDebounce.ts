@@ -1,5 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 
+/**
+ * useDebounce - A custom React hook to debounce input values.
+ * 
+ * @param value The value to be debounced.
+ * @param delay The debounce delay in milliseconds (default: 500ms).
+ * @param callback Optional callback function that runs when the debounced value updates.
+ * @returns The debounced value.
+ */
 const useDebounce = <T>(
   value: T,
   delay: number = 500,

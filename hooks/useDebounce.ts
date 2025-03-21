@@ -1,6 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 
-const useDebounce = <T>(value: T, delay: number = 500): T => {
+const useDebounce = <T>(
+  value: T,
+  delay: number = 500,
+  callback?: (debouncedValue: T) => void
+): T => {
   const [debouncedValue, setDebouncedValue] = useState(value);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -11,6 +15,7 @@ const useDebounce = <T>(value: T, delay: number = 500): T => {
 
     timerRef.current = setTimeout(() => {
       setDebouncedValue(value);
+      if (callback) callback(value);
     }, delay);
 
     return () => {
@@ -18,7 +23,7 @@ const useDebounce = <T>(value: T, delay: number = 500): T => {
         clearTimeout(timerRef.current);
       }
     };
-  }, [value, delay]);
+  }, [value, delay, callback]);
 
   return debouncedValue;
 };

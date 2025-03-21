@@ -21,6 +21,7 @@ const useDebounce = <T>(
     return () => {
       if (timerRef.current) {
         clearTimeout(timerRef.current);
+        timerRef.current = null;
       }
     };
   }, [value, delay, callback]);

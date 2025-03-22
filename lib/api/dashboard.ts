@@ -1,50 +1,32 @@
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://api.example.com";
 
-export const getDashboardStats = async () => {
+const getAuthHeaders = () => {
   const token = sessionStorage.getItem("authToken");
   if (!token) throw new Error("Not authenticated");
-
-  const response = await fetch(`${API_URL}/dashboard/stats`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-  });
-
-  if (!response.ok) throw new Error("Failed to fetch dashboard statistics");
-  return response.json();
+  return { Authorization: `Bearer ${token}`, "Content-Type": "application/json" };
 };
 
-export const getRecentActivities = async () => {
-    const token = sessionStorage.getItem("authToken");
-    if (!token) throw new Error("Not authenticated");
-  
-    const response = await fetch(`${API_URL}/dashboard/recent-activities`, {
+const fetchData = async (endpoint: string) => {
+  try {
+    const response = await fetch(`${API_URL}/dashboard/${endpoint}`, {
       method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
+      headers: getAuthHeaders(),
     });
-  
-    if (!response.ok) throw new Error("Failed to fetch recent activities");
+
+    if (!response.ok) {
+      const errorMessage = await response.text();
+      throw new Error(`Failed to fetch ${endpoint}: ${errorMessage}`);
+    }
+
     return response.json();
-  };
-  
-  export const getTopUsers = async () => {
-    const token = sessionStorage.getItem("authToken");
-    if (!token) throw new Error("Not authenticated");
-  
-    const response = await fetch(`${API_URL}/dashboard/top-users`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    });
-  
-    if (!response.ok) throw new Error("Failed to fetch top-performing users");
-    return response.json();
-  };
-  
+  } catch (error) {
+    console.error(`Error fetching ${endpoint}:`, error);
+    throw error;
+  }
+};
+
+export const getDashboardStats = () => fetchData("stats");
+
+export const getRecentActivities = () => fetchData("recent-activities");
+
+export const getTopUsers = () => fetchData("top-users");

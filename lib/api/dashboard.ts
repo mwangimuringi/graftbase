@@ -32,3 +32,19 @@ export const getRecentActivities = async () => {
     return response.json();
   };
   
+  export const getTopUsers = async () => {
+    const token = sessionStorage.getItem("authToken");
+    if (!token) throw new Error("Not authenticated");
+  
+    const response = await fetch(`${API_URL}/dashboard/top-users`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  
+    if (!response.ok) throw new Error("Failed to fetch top-performing users");
+    return response.json();
+  };
+  

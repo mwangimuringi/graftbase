@@ -1,14 +1,23 @@
+/**
+ * Formats a given date into different formats.
+ * Supports standard date formats and relative time (e.g., "2 days ago").
+ *
+ * @param {Date | string} date - The date to format.
+ * @param {string} format - The format type ("YYYY-MM-DD", "DD-MM-YYYY", "MMM DD, YYYY", "relative").
+ * @returns {string} - The formatted date string.
+ */
 export const formatDate = (
-  date: unknown,
+  date: Date | string,
   format: string = "YYYY-MM-DD"
 ): string => {
-  if (!(date instanceof Date) || isNaN(date.getTime())) {
+  const parsedDate = typeof date === "string" ? new Date(date) : date;
+  if (!(parsedDate instanceof Date) || isNaN(parsedDate.getTime())) {
     throw new Error("Invalid date input");
   }
 
   if (format === "relative") {
     const now = new Date();
-    const diffMs = now.getTime() - date.getTime();
+    const diffMs = now.getTime() - parsedDate.getTime();
     const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
 
     if (diffDays === 0) return "Today";
@@ -25,5 +34,5 @@ export const formatDate = (
   return new Intl.DateTimeFormat(
     "en-GB",
     options[format] || options["YYYY-MM-DD"]
-  ).format(date);
+  ).format(parsedDate);
 };

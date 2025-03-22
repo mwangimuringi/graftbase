@@ -16,3 +16,19 @@ export const updateUser = async (userId: string, userData: object) => {
   if (!response.ok) throw new Error("Failed to update user profile");
   return response.json();
 };
+
+export const getUsers = async (page: number = 1, limit: number = 10) => {
+    const token = sessionStorage.getItem("authToken");
+    if (!token) throw new Error("Not authenticated");
+  
+    const response = await fetch(`${API_URL}/users?page=${page}&limit=${limit}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  
+    if (!response.ok) throw new Error("Failed to fetch users list");
+    return response.json();
+  };  

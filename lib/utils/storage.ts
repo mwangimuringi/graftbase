@@ -12,5 +12,9 @@ export const Storage = {
       const storage = useSession ? sessionStorage : localStorage;
       storage.removeItem(key);
     },
+    clear(useSession = false) {
+      const storage = useSession ? sessionStorage : localStorage;
+      storage.clear();
+    },
   };
   

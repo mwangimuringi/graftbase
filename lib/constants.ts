@@ -23,3 +23,11 @@ export const PERMISSIONS = {
   WRITE: "write",
   DELETE: "delete",
 };
+
+export const CACHE_DURATION = {
+  SHORT: 5 * 60 * 1000, // 5 minutes
+  MEDIUM: 30 * 60 * 1000, // 30 minutes
+  LONG: 60 * 60 * 1000, // 1 hour
+};
+
+export const API_TIMEOUT = 10000; // 10 seconds

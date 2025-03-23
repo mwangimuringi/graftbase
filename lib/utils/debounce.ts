@@ -10,7 +10,7 @@ type DebounceFunction<T extends (...args: any[]) => void> = {
   ) {
     let timer: NodeJS.Timeout | null = null;
   
-    return function (...args: Parameters<T>) {
+    function debounced(...args: Parameters<T>) {
       const callNow = immediate && !timer;
       clearTimeout(timer as NodeJS.Timeout);
       timer = setTimeout(() => {
@@ -19,6 +19,13 @@ type DebounceFunction<T extends (...args: any[]) => void> = {
       }, delay);
   
       if (callNow) func(...args);
+    }
+  
+    debounced.cancel = () => {
+      if (timer) clearTimeout(timer);
+      timer = null;
     };
+  
+    return debounced;
   }  
   

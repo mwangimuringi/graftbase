@@ -3,15 +3,22 @@ type DebounceFunction<T extends (...args: any[]) => void> = {
     cancel: () => void;
   };
 
-export function debounce<T extends (...args: any[]) => void>(
+  export function debounce<T extends (...args: any[]) => void>(
     func: T,
-    delay: number
+    delay: number,
+    immediate = false
   ) {
-    let timer: NodeJS.Timeout;
+    let timer: NodeJS.Timeout | null = null;
   
     return function (...args: Parameters<T>) {
-      clearTimeout(timer);
-      timer = setTimeout(() => func(...args), delay);
+      const callNow = immediate && !timer;
+      clearTimeout(timer as NodeJS.Timeout);
+      timer = setTimeout(() => {
+        timer = null;
+        if (!immediate) func(...args);
+      }, delay);
+  
+      if (callNow) func(...args);
     };
-  }
+  }  
   

@@ -1,20 +1,37 @@
 export const Storage = {
     setItem<T>(key: string, value: T, useSession = false) {
-      const storage = useSession ? sessionStorage : localStorage;
-      storage.setItem(key, JSON.stringify(value));
+      try {
+        const storage = useSession ? sessionStorage : localStorage;
+        storage.setItem(key, JSON.stringify(value));
+      } catch (error) {
+        console.error(`Error setting ${key} in storage:`, error);
+      }
     },
     getItem<T>(key: string, useSession = false): T | null {
-      const storage = useSession ? sessionStorage : localStorage;
-      const item = storage.getItem(key);
-      return item ? JSON.parse(item) : null;
+      try {
+        const storage = useSession ? sessionStorage : localStorage;
+        const item = storage.getItem(key);
+        return item ? JSON.parse(item) : null;
+      } catch (error) {
+        console.error(`Error getting ${key} from storage:`, error);
+        return null;
+      }
     },
     removeItem(key: string, useSession = false) {
-      const storage = useSession ? sessionStorage : localStorage;
-      storage.removeItem(key);
+      try {
+        const storage = useSession ? sessionStorage : localStorage;
+        storage.removeItem(key);
+      } catch (error) {
+        console.error(`Error removing ${key} from storage:`, error);
+      }
     },
     clear(useSession = false) {
-      const storage = useSession ? sessionStorage : localStorage;
-      storage.clear();
+      try {
+        const storage = useSession ? sessionStorage : localStorage;
+        storage.clear();
+      } catch (error) {
+        console.error(`Error clearing storage:`, error);
+      }
     },
   };
   

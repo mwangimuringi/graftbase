@@ -1,3 +1,14 @@
+type Validator = (value: string) => boolean;
+
+export const validate = (value: string, validators: Validator[]): boolean => {
+  return validators.every((validator) => validator(value));
+};
+
+// Example usage
+const isValid = validate("Test123@", [isRequired, isStrongPassword]);
+console.log(isValid); // true or false
+
+
 export const isEmail = (email: string): boolean => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);

@@ -1,25 +1,17 @@
-type Validator = (value: string) => boolean;
+type ValidationResult = { valid: boolean; error?: string };
 
-export const validate = (value: string, validators: Validator[]): boolean => {
-  return validators.every((validator) => validator(value));
+export const validateField = (value: string, rules: { validator: (v: string) => boolean; error: string }[]): ValidationResult => {
+  for (const rule of rules) {
+    if (!rule.validator(value)) {
+      return { valid: false, error: rule.error };
+    }
+  }
+  return { valid: true };
 };
 
 // Example usage
-const isValid = validate("Test123@", [isRequired, isStrongPassword]);
-console.log(isValid); // true or false
-
-
-export const isEmail = (email: string): boolean => {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(email);
-};
-
-export const isStrongPassword = (password: string): boolean => {
-  return /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(
-    password
-  );
-};
-
-export const isNumber = (value: string): boolean => {
-  return !isNaN(Number(value));
-};
+const result = validateField("Test123@", [
+  { validator: isRequired, error: "Field is required" },
+  { validator: isStrongPassword, error: "Password is too weak" },
+]);
+console.log(result); // { valid: true } or { valid: false, error: "..." }

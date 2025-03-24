@@ -1,25 +1,26 @@
 import fs from "fs";
 const getTimestamp = () => new Date().toISOString();
-const LOG_FILE = "logs/app.log";
+const LOG_FILE = "logs/app.json";
 
 const logToFile = (level: string, message: string) => {
-  fs.appendFileSync(LOG_FILE, `[${getTimestamp()}] [${level}] ${message}\n`);
+  const logEntry = { timestamp: getTimestamp(), level, message };
+  fs.appendFileSync(LOG_FILE, JSON.stringify(logEntry) + "\n");
 };
 
-export const log = (message: string) => {
-  console.log(`[LOG] ${message}`);
-};
-
-const levels = { error: 0, warn: 1, info: 2 };
 export const logger = {
   info: (message: string) => {
-    if (levels[LOG_LEVEL] >= 2)
-      console.info(`[${getTimestamp()}] [INFO] ${message}`);
+    const logEntry = `[${getTimestamp()}] [INFO] ${message}`;
+    console.info(logEntry);
+    logToFile("INFO", message);
   },
   warn: (message: string) => {
-    if (levels[LOG_LEVEL] >= 1)
-      console.warn(`[${getTimestamp()}] [WARN] ${message}`);
+    const logEntry = `[${getTimestamp()}] [WARN] ${message}`;
+    console.warn(logEntry);
+    logToFile("WARN", message);
   },
-  error: (message: string) =>
-    console.error(`[${getTimestamp()}] [ERROR] ${message}`),
+  error: (message: string) => {
+    const logEntry = `[${getTimestamp()}] [ERROR] ${message}`;
+    console.error(logEntry);
+    logToFile("ERROR", message);
+  },
 };

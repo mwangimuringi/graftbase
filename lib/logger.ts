@@ -1,9 +1,14 @@
+import fs from "fs";
+const getTimestamp = () => new Date().toISOString();
+const LOG_FILE = "logs/app.log";
+
+const logToFile = (level: string, message: string) => {
+  fs.appendFileSync(LOG_FILE, `[${getTimestamp()}] [${level}] ${message}\n`);
+};
+
 export const log = (message: string) => {
   console.log(`[LOG] ${message}`);
 };
-
-const getTimestamp = () => new Date().toISOString();
-const LOG_LEVEL = process.env.LOG_LEVEL || "info";
 
 const levels = { error: 0, warn: 1, info: 2 };
 export const logger = {

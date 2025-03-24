@@ -3,3 +3,7 @@ export const isEmail = (email: string): boolean => {
     return emailRegex.test(email);
   };
   
+  export const isStrongPassword = (password: string): boolean => {
+    return /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(password);
+  };
+  

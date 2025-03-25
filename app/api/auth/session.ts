@@ -1,6 +1,3 @@
-import { auth } from "@clerk/nextjs";
-import { NextResponse } from "next/server";
-
 export async function GET(req: Request) {
     const session = auth();
 
@@ -8,5 +5,9 @@ export async function GET(req: Request) {
         return NextResponse.json({ error: "No active session" }, { status: 401 });
     }
 
-    return NextResponse.json({ session });
+    return NextResponse.json({
+        userId: session.userId,
+        email: session.user?.emailAddresses[0]?.emailAddress || "N/A",
+        status: session.status,
+    });
 }

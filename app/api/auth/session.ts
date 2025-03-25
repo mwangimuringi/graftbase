@@ -1,13 +1,13 @@
 export async function GET(req: Request) {
     try {
-        const session = auth();
+        let session = auth();
 
         if (!session) {
-            return NextResponse.json({ error: "No active session found" }, { status: 401 });
+            return NextResponse.json({ error: "No active session" }, { status: 401 });
         }
 
         if (session.status !== "active") {
-            return NextResponse.json({ error: "Session expired or invalid" }, { status: 403 });
+            session = await session.refresh();
         }
 
         return NextResponse.json({
@@ -16,7 +16,7 @@ export async function GET(req: Request) {
             status: session.status,
         });
     } catch (error) {
-        console.error("Session retrieval error:", error);
+        console.error("Session error:", error);
         return NextResponse.json({ error: "Failed to fetch session" }, { status: 500 });
     }
 }

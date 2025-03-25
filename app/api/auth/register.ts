@@ -1,5 +1,3 @@
-import { clerkClient } from "@clerk/nextjs";
-
 export async function POST(req: Request) {
     try {
         const { email, password, name } = await req.json();
@@ -13,8 +11,12 @@ export async function POST(req: Request) {
             firstName: name
         });
 
-        return NextResponse.json({ message: "User registered successfully", userId: user.id });
+        return NextResponse.json({
+            message: "User registered successfully",
+            user: { id: user.id, email: user.emailAddresses[0].emailAddress }
+        });
     } catch (error) {
+        console.error("Registration error:", error);
         return NextResponse.json({ error: "Registration failed" }, { status: 500 });
     }
 }

@@ -1,13 +1,17 @@
+import { NextResponse } from "next/server";
+import { auth } from "@clerk/nextjs";
+import { cookies } from "next/headers";
+
 export async function POST(req: Request) {
     try {
         const session = auth();
-        if (!session) {
-            return NextResponse.json({ error: "No active session to log out" }, { status: 401 });
+        if (session) {
+            await session.revoke();
         }
 
-        await session.revoke();
+        cookies().delete("authToken");
 
-        return NextResponse.json({ message: "User logged out successfully" });
+        return NextResponse.redirect(new URL("/", req.url));
     } catch (error) {
         console.error("Logout error:", error);
         return NextResponse.json({ error: "Logout process encountered an issue" }, { status: 500 });

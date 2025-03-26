@@ -5,8 +5,8 @@ export default authMiddleware({
             return NextResponse.redirect(new URL("/login", req.url));
         }
 
-        if (auth.sessionClaims?.expired) {
-            return NextResponse.json({ error: "Session expired" }, { status: 401 });
+        if (req.nextUrl.pathname.startsWith("/admin") && auth.sessionClaims?.role !== "admin") {
+            return NextResponse.json({ error: "Forbidden" }, { status: 403 });
         }
 
         return NextResponse.next();

@@ -3,8 +3,6 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://api.example.com";
 export const logout = async () => {
     localStorage.removeItem("authToken");
   };
-
-  
   
   export const login = async (email: string, password: string) => {
     try {
@@ -13,8 +11,6 @@ export const logout = async () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
-
-
   
       if (!response.ok) {
         const errorData = await response.json();
@@ -38,16 +34,12 @@ export const signup = async (email: string, password: string, name: string) => {
   });
 
   if (!response.ok) throw new Error("Signup failed");
-
-
   return response.json();
 };
 
 export const getCurrentUser = async () => {
     const token = localStorage.getItem("authToken");
     if (!token) throw new Error("No authentication token found");
-
-
   
     const response = await fetch(`${API_URL}/auth/me`, {
       method: "GET",
@@ -56,8 +48,6 @@ export const getCurrentUser = async () => {
         Authorization: `Bearer ${token}`,
       },
     });
-
-
   
     if (!response.ok) throw new Error("Failed to fetch user data");
     return response.json();

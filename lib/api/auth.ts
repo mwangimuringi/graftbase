@@ -3,6 +3,8 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://api.example.com";
 export const logout = async () => {
     localStorage.removeItem("authToken");
   };
+
+  
   
   export const login = async (email: string, password: string) => {
     try {
@@ -12,7 +14,7 @@ export const logout = async () => {
         body: JSON.stringify({ email, password }),
       });
 
-      
+
   
       if (!response.ok) {
         const errorData = await response.json();

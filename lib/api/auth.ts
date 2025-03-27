@@ -43,7 +43,7 @@ export const getCurrentUser = async () => {
     const token = localStorage.getItem("authToken");
     if (!token) throw new Error("No authentication token found");
 
-    
+
   
     const response = await fetch(`${API_URL}/auth/me`, {
       method: "GET",
@@ -52,6 +52,8 @@ export const getCurrentUser = async () => {
         Authorization: `Bearer ${token}`,
       },
     });
+
+    
   
     if (!response.ok) throw new Error("Failed to fetch user data");
     return response.json();

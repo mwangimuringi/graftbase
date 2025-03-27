@@ -13,6 +13,8 @@ export const updateUser = async (userId: string, userData: object) => {
     body: JSON.stringify(userData),
   });
 
+  
+
   if (!response.ok) throw new Error("Failed to update user profile");
   return response.json();
 };

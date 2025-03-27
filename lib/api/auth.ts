@@ -11,6 +11,8 @@ export const logout = async () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
+
+      
   
       if (!response.ok) {
         const errorData = await response.json();
@@ -53,7 +55,7 @@ export const getCurrentUser = async () => {
       },
     });
 
-    
+
   
     if (!response.ok) throw new Error("Failed to fetch user data");
     return response.json();

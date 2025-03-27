@@ -4,8 +4,6 @@ export const updateUser = async (userId: string, userData: object) => {
   const token = sessionStorage.getItem("authToken");
   if (!token) throw new Error("Not authenticated");
 
-
-
   const response = await fetch(`${API_URL}/users/${userId}`, {
     method: "PUT",
     headers: {
@@ -14,8 +12,6 @@ export const updateUser = async (userId: string, userData: object) => {
     },
     body: JSON.stringify(userData),
   });
-
-
 
   if (!response.ok) throw new Error("Failed to update user profile");
   return response.json();
@@ -32,8 +28,6 @@ export const getUsers = async (page: number = 1, limit: number = 10) => {
         Authorization: `Bearer ${token}`,
       },
     });
-
-    
   
     if (!response.ok) throw new Error("Failed to fetch users list");
     return response.json();

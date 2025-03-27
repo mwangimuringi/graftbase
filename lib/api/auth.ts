@@ -34,6 +34,8 @@ export const signup = async (email: string, password: string, name: string) => {
   });
 
   if (!response.ok) throw new Error("Signup failed");
+
+  
   return response.json();
 };
 

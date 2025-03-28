@@ -28,7 +28,9 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
             return NextResponse.json({ error: "User not found" }, { status: 404 });
         }
 
-        return NextResponse.json(user);
+        // Reduce response size by removing unnecessary fields
+        const { id, name, email } = user;
+        return NextResponse.json({ id, name, email });
     } catch (error) {
         logError("Error fetching user:", error);
         return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });

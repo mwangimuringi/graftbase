@@ -1,28 +1,44 @@
-import bcrypt from "bcrypt";
+import { rateLimit } from "@/lib/rateLimit";
 
 export async function POST(req: NextRequest) {
-  const { token, newPassword } = await req.json();
+  const { email } = await req.json();
 
-  const resetToken = await db.passwordResetToken.findUnique({
-    where: { token },
-  });
-
-  if (!resetToken || resetToken.expiresAt < new Date()) {
+  if (!validator.isEmail(email)) {
     return NextResponse.json(
-      { error: "Invalid or expired token" },
+      { error: "Invalid email format" },
       { status: 400 }
     );
   }
 
-  const hashedPassword = await bcrypt.hash(newPassword, 10);
-  await db.user.update({
-    where: { email: resetToken.email },
-    data: { password: hashedPassword },
-  });
-  await db.passwordResetToken.delete({ where: { token } });
+  const limitExceeded = await rateLimit(email);
+  if (limitExceeded) {
+    return NextResponse.json(
+      { error: "Too many requests. Try again later." },
+      { status: 429 }
+    );
+  }
 
-  console.log(`Password successfully reset for: ${resetToken.email}`);
+  const user = await db.user.findUnique({ where: { email } });
+  if (!user) {
+    return NextResponse.json({
+      message: "If this email exists, a reset link will be sent.",
+    });
+  }
+
+  const token = generateToken();
+  await db.passwordResetToken.create({
+    data: { email, token, expiresAt: new Date(Date.now() + 3600000) },
+  });
+
+  const resetLink = `${process.env.NEXT_PUBLIC_APP_URL}/reset-password?token=${token}`;
+  await sendEmail(
+    email,
+    "Password Reset",
+    `Click here to reset your password: ${resetLink}`
+  );
+
+  console.log(`Password reset request processed for: ${email}`);
   return NextResponse.json({
-    message: "Password has been reset successfully.",
+    message: "If this email exists, a reset link will be sent.",
   });
 }

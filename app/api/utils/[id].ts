@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { authenticateUser } from "@/lib/auth";
+import { logError } from "@/lib/logger";
 
 export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
     const userId = params.id;
@@ -29,6 +30,7 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
 
         return NextResponse.json(user);
     } catch (error) {
+        logError("Error fetching user:", error);
         return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
     }
 }

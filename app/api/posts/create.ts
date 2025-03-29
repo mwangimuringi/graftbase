@@ -18,10 +18,26 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    if (title.length > 100) {
+      return NextResponse.json(
+        { error: "Title must be under 100 characters" },
+        { status: 400 }
+      );
+    }
+    if (content.length > 5000) {
+      return NextResponse.json(
+        { error: "Content must be under 5000 characters" },
+        { status: 400 }
+      );
+    }
+
+    const sanitizedTitle = title.trim();
+    const sanitizedContent = content.trim();
+
     const newPost = await prisma.post.create({
       data: {
-        title,
-        content,
+        title: sanitizedTitle,
+        content: sanitizedContent,
         userId: authUser.id,
       },
     });

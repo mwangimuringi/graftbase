@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import prisma from "@/lib/prisma";
 import { authenticateUser } from "@/lib/auth";
 
 export async function PUT(req: NextRequest) {
@@ -18,13 +19,20 @@ export async function PUT(req: NextRequest) {
       );
     }
 
+    const updatedUser = await prisma.user.update({
+      where: { id: authUser.id },
+      data: { name, email },
+      select: { id: true, name: true, email: true },
+    });
+
     return NextResponse.json({
-      message: "User authenticated and input validated",
+      message: "User profile updated",
+      user: updatedUser,
     });
   } catch (error) {
     return NextResponse.json(
-      { error: "Invalid request format" },
-      { status: 400 }
+      { error: "Failed to update profile" },
+      { status: 500 }
     );
   }
 }

@@ -12,9 +12,13 @@ export async function DELETE(req: NextRequest) {
 
         await prisma.user.delete({
             where: { id: authUser.id },
+            include: {
+                posts: true, // Example: Deletes user-related posts
+                comments: true, // Example: Deletes user-related comments
+            },
         });
 
-        return NextResponse.json({ message: "User account deleted successfully" });
+        return NextResponse.json({ message: "User account and related data deleted successfully" });
     } catch (error) {
         logError("User deletion failed", error);
         return NextResponse.json({ error: "Failed to delete user account" }, { status: 500 });

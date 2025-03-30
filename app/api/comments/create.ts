@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { authenticateUser } from "@/lib/auth";
+import { logError } from "@/lib/logger";
 
 export async function POST(req: NextRequest) {
   try {
@@ -28,10 +29,12 @@ export async function POST(req: NextRequest) {
     });
 
     return NextResponse.json({
-      message: "Comment created",
+      success: true,
+      message: "Comment created successfully",
       comment: newComment,
     });
   } catch (error) {
+    logError("Error creating comment", error);
     return NextResponse.json(
       { error: "Failed to create comment" },
       { status: 500 }

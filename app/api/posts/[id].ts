@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { authenticateUser } from "@/lib/auth";
+import { logError } from "@/lib/logger";
 
 export async function GET(
   req: NextRequest,
@@ -23,6 +24,7 @@ export async function GET(
 
     return NextResponse.json(post);
   } catch (error) {
+    logError("Error fetching post", error);
     return NextResponse.json(
       { error: "Failed to fetch post" },
       { status: 500 }

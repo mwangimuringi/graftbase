@@ -1,8 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
+import { authenticateUser } from "@/lib/auth";
 
 export async function POST(req: NextRequest) {
   try {
+    const authUser = await authenticateUser(req);
+    if (!authUser) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
     const body = await req.json();
     const { postId, content } = body;
 
@@ -17,6 +23,7 @@ export async function POST(req: NextRequest) {
       data: {
         postId,
         content,
+        userId: authUser.id,
       },
     });
 

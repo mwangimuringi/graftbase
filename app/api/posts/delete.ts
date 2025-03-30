@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import prisma from "@/lib/prisma";
 
 export async function DELETE(req: NextRequest) {
   try {
@@ -12,11 +13,13 @@ export async function DELETE(req: NextRequest) {
       );
     }
 
-    return NextResponse.json({ message: `Post ${id} marked for deletion` });
+    await prisma.post.delete({ where: { id } });
+
+    return NextResponse.json({ message: `Post ${id} deleted successfully` });
   } catch (error) {
     return NextResponse.json(
-      { error: "Invalid request format" },
-      { status: 400 }
+      { error: "Failed to delete post" },
+      { status: 500 }
     );
   }
 }

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { authenticateUser } from "@/lib/auth";
+import { logError } from "@/lib/logger";
 
 export async function DELETE(req: NextRequest) {
   try {
@@ -27,8 +28,12 @@ export async function DELETE(req: NextRequest) {
 
     await prisma.post.delete({ where: { id } });
 
-    return NextResponse.json({ message: "Post deleted successfully" });
+    return NextResponse.json({
+      success: true,
+      message: "Post deleted successfully",
+    });
   } catch (error) {
+    logError("Error deleting post", error);
     return NextResponse.json(
       { error: "Failed to delete post" },
       { status: 500 }

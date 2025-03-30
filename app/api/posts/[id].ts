@@ -8,10 +8,18 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
+    if (!params.id) {
+      return NextResponse.json(
+        { error: "Post ID is required" },
+        { status: 400 }
+      );
+    }
+
     const authUser = await authenticateUser(req);
 
     const post = await prisma.post.findUnique({
       where: { id: params.id },
+      include: { author: { select: { id: true, name: true } } },
     });
 
     if (!post) {
@@ -22,7 +30,13 @@ export async function GET(
       return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
     }
 
-    return NextResponse.json(post);
+    return NextResponse.json({
+      post,
+      metadata: {
+        requestedAt: new Date().toISOString(),
+        author: post.author,
+      },
+    });
   } catch (error) {
     logError("Error fetching post", error);
     return NextResponse.json(

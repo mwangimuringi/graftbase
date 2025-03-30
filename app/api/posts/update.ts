@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { authenticateUser } from "@/lib/auth";
+import { logError } from "@/lib/logger";
 
 export async function PUT(req: NextRequest) {
   try {
@@ -30,8 +31,13 @@ export async function PUT(req: NextRequest) {
       data: { title, content },
     });
 
-    return NextResponse.json(updatedPost);
+    return NextResponse.json({
+      success: true,
+      message: "Post updated successfully",
+      post: updatedPost,
+    });
   } catch (error) {
+    logError("Error updating post", error);
     return NextResponse.json(
       { error: "Failed to update post" },
       { status: 500 }

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import prisma from "@/lib/prisma";
 
 export async function PUT(req: NextRequest) {
   try {
@@ -12,11 +13,16 @@ export async function PUT(req: NextRequest) {
       );
     }
 
-    return NextResponse.json({ message: `Updating post ${id} with new data` });
+    const updatedPost = await prisma.post.update({
+      where: { id },
+      data: { title, content },
+    });
+
+    return NextResponse.json(updatedPost);
   } catch (error) {
     return NextResponse.json(
-      { error: "Invalid request format" },
-      { status: 400 }
+      { error: "Failed to update post" },
+      { status: 500 }
     );
   }
 }

@@ -18,13 +18,18 @@ export async function DELETE(req: NextRequest) {
     );
   }
 
-  const comment = await prisma.comment.findUnique({ where: { id } });
+  const comment = await prisma.comment.findUnique({
+    where: { id },
+    include: { post: true },
+  });
 
   if (!comment) {
     return NextResponse.json({ error: "Comment not found" }, { status: 404 });
   }
 
-  return NextResponse.json({
-    message: "User authenticated, comment ready for deletion",
-  });
+  if (comment.userId !== authUser.id && comment.post.authorId !== authUser.id) {
+    return NextResponse.json({ error: "Access denied" }, { status: 403 });
+  }
+
+  return NextResponse.json({ message: "User authorized, deleting comment" });
 }

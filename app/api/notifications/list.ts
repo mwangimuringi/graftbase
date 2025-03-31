@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import prisma from "@/lib/prisma";
 import { authenticateUser } from "@/lib/auth";
 
 export async function GET(req: NextRequest) {
@@ -7,7 +8,10 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  return NextResponse.json({
-    message: "User authenticated, fetching notifications...",
+  const notifications = await prisma.notification.findMany({
+    where: { userId: authUser.id },
+    orderBy: { createdAt: "desc" },
   });
+
+  return NextResponse.json({ notifications });
 }

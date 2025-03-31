@@ -8,23 +8,22 @@ export async function PUT(req: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const { searchParams } = new URL(req.url);
-  const notificationId = searchParams.get("id");
+  const { notificationIds } = await req.json();
 
-  if (!notificationId) {
+  if (!notificationIds || !Array.isArray(notificationIds)) {
     return NextResponse.json(
-      { error: "Notification ID is required" },
+      { error: "Invalid request format" },
       { status: 400 }
     );
   }
 
-  await prisma.notification.update({
-    where: { id: notificationId, userId: authUser.id },
+  await prisma.notification.updateMany({
+    where: { id: { in: notificationIds }, userId: authUser.id },
     data: { read: true },
   });
 
   return NextResponse.json({
     success: true,
-    message: "Notification marked as read",
+    message: "Notifications marked as read",
   });
 }

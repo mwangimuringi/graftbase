@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import prisma from "@/lib/prisma";
 
 export async function DELETE(req: NextRequest) {
     const { searchParams } = new URL(req.url);
@@ -8,5 +9,11 @@ export async function DELETE(req: NextRequest) {
         return NextResponse.json({ error: "Comment ID is required" }, { status: 400 });
     }
 
-    return NextResponse.json({ message: `Validated comment ID: ${id}` });
+    const comment = await prisma.comment.findUnique({ where: { id } });
+
+    if (!comment) {
+        return NextResponse.json({ error: "Comment not found" }, { status: 404 });
+    }
+
+    return NextResponse.json({ message: "Comment found, ready for deletion" });
 }

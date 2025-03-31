@@ -21,10 +21,16 @@ export async function GET(
 
   const comment = await prisma.comment.findUnique({
     where: { id },
+    include: { post: true },
   });
 
   if (!comment) {
     return NextResponse.json({ error: "Comment not found" }, { status: 404 });
+  }
+
+  // Allow access only if the user is the comment owner or the post author
+  if (comment.userId !== authUser.id && comment.post.authorId !== authUser.id) {
+    return NextResponse.json({ error: "Access denied" }, { status: 403 });
   }
 
   return NextResponse.json({ comment });

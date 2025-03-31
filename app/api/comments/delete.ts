@@ -1,19 +1,30 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
+import { authenticateUser } from "@/lib/auth";
 
 export async function DELETE(req: NextRequest) {
-    const { searchParams } = new URL(req.url);
-    const id = searchParams.get("id");
+  const authUser = await authenticateUser(req);
+  if (!authUser) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
 
-    if (!id) {
-        return NextResponse.json({ error: "Comment ID is required" }, { status: 400 });
-    }
+  const { searchParams } = new URL(req.url);
+  const id = searchParams.get("id");
 
-    const comment = await prisma.comment.findUnique({ where: { id } });
+  if (!id) {
+    return NextResponse.json(
+      { error: "Comment ID is required" },
+      { status: 400 }
+    );
+  }
 
-    if (!comment) {
-        return NextResponse.json({ error: "Comment not found" }, { status: 404 });
-    }
+  const comment = await prisma.comment.findUnique({ where: { id } });
 
-    return NextResponse.json({ message: "Comment found, ready for deletion" });
+  if (!comment) {
+    return NextResponse.json({ error: "Comment not found" }, { status: 404 });
+  }
+
+  return NextResponse.json({
+    message: "User authenticated, comment ready for deletion",
+  });
 }

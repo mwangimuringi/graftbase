@@ -32,10 +32,6 @@ export const logout = async () => {
       console.error("Login error:", error);
       throw error;
     }
-  };
-      sessionStorage.setItem("authToken", data.token);
-      throw error;
-    }
   };  
 
 export const signup = async (email: string, password: string, name: string) => {

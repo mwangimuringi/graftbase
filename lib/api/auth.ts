@@ -19,6 +19,8 @@ export const logout = async () => {
   
       const data = await response.json();
       sessionStorage.setItem("authToken", data.token);
+
+      
       return data;
     } catch (error) {
       console.error("Login error:", error);

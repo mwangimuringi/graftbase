@@ -30,8 +30,6 @@ export const logout = async () => {
       return data;
     } catch (error) {
       console.error("Login error:", error);
-      throw error;
-    }
   };  
 
 export const signup = async (email: string, password: string, name: string) => {

@@ -43,8 +43,6 @@ export const signup = async (email: string, password: string, name: string) => {
   return response.json();
 };
 
-
-
 export const getCurrentUser = async () => {
     const token = localStorage.getItem("authToken");
     if (!token) throw new Error("No authentication token found");

@@ -10,9 +10,11 @@ export async function GET(req: NextRequest) {
 
     const userCount = await prisma.user.count();
     const postCount = await prisma.post.count();
+    const commentCount = await prisma.comment.count();
+    const activeUsers = await prisma.user.count({ where: { lastLogin: { not: null } } });
 
     return NextResponse.json({
         success: true,
-        stats: { userCount, postCount },
+        stats: { userCount, postCount, commentCount, activeUsers },
     });
 }

@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { authenticateUser } from "@/lib/auth";
 import { validateSettings } from "@/lib/validation";
-import { logError } from "@/lib/logger";
+import { logInfo, logError } from "@/lib/logger";
 
 export async function PUT(req: NextRequest) {
     try {
@@ -22,7 +22,13 @@ export async function PUT(req: NextRequest) {
             data: { settings: { ...authUser.settings, ...body } },
         });
 
-        return NextResponse.json({ success: true, message: "Settings updated", data: updatedSettings });
+        logInfo(`User ${authUser.id} updated settings successfully`);
+
+        return NextResponse.json({
+            success: true,
+            message: "Settings updated",
+            data: updatedSettings.settings,
+        });
     } catch (error) {
         logError("Error updating user settings", error);
         return NextResponse.json({ error: "Internal server error" }, { status: 500 });

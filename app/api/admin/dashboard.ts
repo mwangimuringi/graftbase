@@ -10,9 +10,12 @@ export async function GET(req: NextRequest) {
             return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
         }
 
+        const { from, to } = req.nextUrl.searchParams;
+        const dateFilter = from && to ? { gte: new Date(from), lte: new Date(to) } : undefined;
+
         const userCount = await prisma.user.count();
-        const postCount = await prisma.post.count();
-        const commentCount = await prisma.comment.count();
+        const postCount = await prisma.post.count({ where: { createdAt: dateFilter } });
+        const commentCount = await prisma.comment.count({ where: { createdAt: dateFilter } });
         const activeUsers = await prisma.user.count({ where: { lastLogin: { not: null } } });
 
         return NextResponse.json({

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { authenticateUser } from "@/lib/auth";
-import { logError } from "@/lib/logger";
+import { logInfo, logError } from "@/lib/logger";
 
 export async function GET(req: NextRequest) {
     try {
@@ -17,6 +17,8 @@ export async function GET(req: NextRequest) {
         const postCount = await prisma.post.count({ where: { createdAt: dateFilter } });
         const commentCount = await prisma.comment.count({ where: { createdAt: dateFilter } });
         const activeUsers = await prisma.user.count({ where: { lastLogin: { not: null } } });
+
+        logInfo(`Admin ${authUser.id} fetched dashboard stats successfully`);
 
         return NextResponse.json({
             success: true,

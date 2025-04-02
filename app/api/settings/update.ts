@@ -10,7 +10,6 @@ export async function PUT(req: NextRequest) {
     }
 
     const body = await req.json();
-    
     const validationError = validateSettings(body);
     if (validationError) {
         return NextResponse.json({ error: validationError }, { status: 400 });
@@ -18,7 +17,7 @@ export async function PUT(req: NextRequest) {
 
     const updatedSettings = await prisma.user.update({
         where: { id: authUser.id },
-        data: { settings: body },
+        data: { settings: { ...authUser.settings, ...body } }, // Merge old settings with new ones
     });
 
     return NextResponse.json({ success: true, message: "Settings updated", data: updatedSettings });

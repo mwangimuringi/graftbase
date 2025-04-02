@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import prisma from "@/lib/prisma";
 import { authenticateUser } from "@/lib/auth";
 
 export async function PUT(req: NextRequest) {
@@ -7,5 +8,12 @@ export async function PUT(req: NextRequest) {
         return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    return NextResponse.json({ message: "User authenticated, processing request..." });
+    const body = await req.json();
+
+    const updatedSettings = await prisma.user.update({
+        where: { id: authUser.id },
+        data: { settings: body },
+    });
+
+    return NextResponse.json({ success: true, message: "Settings updated", data: updatedSettings });
 }

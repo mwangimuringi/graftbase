@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import prisma from "@/lib/prisma";
 import { authenticateUser } from "@/lib/auth";
 
 export async function GET(req: NextRequest) {
@@ -7,7 +8,9 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
   }
 
-  return NextResponse.json({
-    message: "Admin authenticated, fetching users...",
+  const users = await prisma.user.findMany({
+    select: { id: true, name: true, email: true, role: true, createdAt: true },
   });
+
+  return NextResponse.json({ success: true, users });
 }

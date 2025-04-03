@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { authenticateUser } from "@/lib/auth";
-import { logError } from "@/lib/logger";
+import { logInfo, logError } from "@/lib/logger";
 
 export async function GET(req: NextRequest) {
   try {
@@ -30,6 +30,8 @@ export async function GET(req: NextRequest) {
     });
 
     const totalUsers = await prisma.user.count({ where: roleFilter });
+
+    logInfo(`Admin ${authUser.id} fetched user list successfully`);
 
     return NextResponse.json({
       success: true,

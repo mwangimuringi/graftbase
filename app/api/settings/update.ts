@@ -26,8 +26,6 @@ export async function PUT(req: NextRequest) {
 
         return NextResponse.json({
             success: true,
-
-            
             message: "Settings updated",
             data: updatedSettings.settings,
         });

@@ -10,11 +10,14 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
     }
 
-    const { page = "1", limit = "10" } = req.nextUrl.searchParams;
+    const { page = "1", limit = "10", role } = req.nextUrl.searchParams;
     const pageNum = parseInt(page, 10);
     const pageSize = parseInt(limit, 10);
 
+    const roleFilter = role ? { role } : {};
+
     const users = await prisma.user.findMany({
+      where: roleFilter,
       take: pageSize,
       skip: (pageNum - 1) * pageSize,
       select: {
@@ -26,7 +29,7 @@ export async function GET(req: NextRequest) {
       },
     });
 
-    const totalUsers = await prisma.user.count();
+    const totalUsers = await prisma.user.count({ where: roleFilter });
 
     return NextResponse.json({
       success: true,

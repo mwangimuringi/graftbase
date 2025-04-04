@@ -15,5 +15,8 @@ if (email !== 'admin@example.com' || password !== 'admin123') {
     return NextResponse.json({ status: 'error', message: 'User not found or password incorrect' }, { status: 401 });
   }
   
+  const token = `mock-token-${Date.now()}`;
+return NextResponse.json({ status: 'success', token });
+
   }
   

@@ -1,6 +1,9 @@
-// app/auth/route.ts
-import { NextResponse } from 'next/server';
-
-export async function GET() {
-  return NextResponse.json({ message: 'Auth endpoint' });
-}
+export async function POST(req: Request) {
+    const { email, password } = await req.json();
+    // Placeholder auth logic
+    if (email && password) {
+      return NextResponse.json({ status: 'success', token: 'fake-jwt' });
+    }
+    return NextResponse.json({ status: 'error', message: 'Invalid credentials' }, { status: 401 });
+  }
+  

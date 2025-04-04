@@ -15,9 +15,6 @@ export const POST = async (req: Request) => {
       return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
     }
 
-
-
-    
     // Generate a mock token (Replace with real JWT logic)
     const token = `mock-token-${Date.now()}`;
     return NextResponse.json({ token });

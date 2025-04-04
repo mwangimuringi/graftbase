@@ -10,5 +10,10 @@ export async function POST(req: Request) {
         return NextResponse.json({ status: 'error', message: 'Email and password required' }, { status: 400 });
       }
       
+      // Simulated user check
+if (email !== 'admin@example.com' || password !== 'admin123') {
+    return NextResponse.json({ status: 'error', message: 'User not found or password incorrect' }, { status: 401 });
+  }
+  
   }
   

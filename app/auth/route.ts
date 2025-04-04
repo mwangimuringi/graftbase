@@ -19,4 +19,10 @@ if (email !== 'admin@example.com' || password !== 'admin123') {
 return NextResponse.json({ status: 'success', token });
 
   }
+
+  export async function handler(req: Request) {
+    if (req.method === 'POST') return POST(req);
+    return NextResponse.json({ message: 'Method not allowed' }, { status: 405 });
+  }
+  
   

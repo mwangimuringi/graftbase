@@ -11,6 +11,8 @@ export const POST = async (req: Request) => {
     }
 
     // Simulated user check
+
+    // Replace with your own user check logic
     if (email !== 'admin@example.com' || password !== 'admin123') {
       return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
     }

@@ -10,8 +10,6 @@ export const POST = async (req: Request) => {
       return NextResponse.json({ error: 'Email and password required' }, { status: 400 });
     }
 
-    // Simulated user check
-
     // Replace with your own user check logic
     if (email !== 'admin@example.com' || password !== 'admin123') {
       return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });

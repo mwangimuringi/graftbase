@@ -11,7 +11,6 @@ export const updateUser = async (userId: string, userData: object) => {
       Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(userData),
-    
   });
 
   if (!response.ok) throw new Error("Failed to update user profile");

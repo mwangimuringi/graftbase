@@ -1,3 +1,5 @@
+import { NextResponse } from "next/server";
+
 export default authMiddleware({
   publicRoutes: ["/", "/api/public"],
   ignoredRoutes: ["/api/health", "/api/status"],

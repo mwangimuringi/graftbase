@@ -4,6 +4,9 @@ import Link from "next/link";
 const Sidebar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+  };
 
   return (
     <aside

@@ -4,8 +4,8 @@ type Stats = {
     sessions: number;
   };
   
-  export async function getStats(): Promise<Stats> {
-    const stats: Stats = await new Promise((resolve) =>
+  async function fetchMockStats(): Promise<Stats> {
+    return new Promise((resolve) =>
       setTimeout(() => {
         resolve({
           users: 1234,
@@ -14,7 +14,9 @@ type Stats = {
         });
       }, 300)
     );
+  }
   
-    return stats;
+  export async function getStats(): Promise<Stats> {
+    return await fetchMockStats();
   }
   

@@ -1,6 +1,11 @@
-export async function getStats() {
-    // Simulate fetching from a database or API
-    const stats = await new Promise((resolve) =>
+type Stats = {
+    users: number;
+    revenue: string;
+    sessions: number;
+  };
+  
+  export async function getStats(): Promise<Stats> {
+    const stats: Stats = await new Promise((resolve) =>
       setTimeout(() => {
         resolve({
           users: 1234,

@@ -15,8 +15,10 @@ type Activity = {
   export async function getRecentActivity(typeFilter?: string): Promise<Activity[]> {
     const all = await fetchMockActivity();
   
-    if (!typeFilter) return all;
+    const filtered = typeFilter ? all.filter((a) => a.type === typeFilter) : all;
   
-    return all.filter((a) => a.type === typeFilter);
+    return filtered.sort(
+      (a, b) => new Date(b.time).getTime() - new Date(a.time).getTime()
+    );
   }  
   

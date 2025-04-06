@@ -12,7 +12,11 @@ type Activity = {
     ];
   }
   
-  export async function getRecentActivity(): Promise<Activity[]> {
-    return fetchMockActivity();
-  }
+  export async function getRecentActivity(typeFilter?: string): Promise<Activity[]> {
+    const all = await fetchMockActivity();
+  
+    if (!typeFilter) return all;
+  
+    return all.filter((a) => a.type === typeFilter);
+  }  
   

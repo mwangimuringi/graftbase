@@ -1,10 +1,15 @@
-// /app/dashboard/stats.ts
-
 export async function getStats() {
-    return {
-      users: 0,
-      revenue: "$0",
-      sessions: 0,
-    };
+    // Simulate fetching from a database or API
+    const stats = await new Promise((resolve) =>
+      setTimeout(() => {
+        resolve({
+          users: 1234,
+          revenue: "$12,345",
+          sessions: 5678,
+        });
+      }, 300)
+    );
+  
+    return stats;
   }
   

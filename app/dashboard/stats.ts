@@ -16,7 +16,14 @@ type Stats = {
     );
   }
   
-  export async function getStats(): Promise<Stats> {
-    return await fetchMockStats();
+  export async function getStats(source: "mock" | "live" = "mock"): Promise<Stats> {
+    if (source === "mock") return fetchMockStats();
+  
+    // Placeholder for real backend logic
+    return {
+      users: 0,
+      revenue: "$0",
+      sessions: 0,
+    };
   }
   

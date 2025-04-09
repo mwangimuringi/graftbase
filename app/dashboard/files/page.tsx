@@ -7,7 +7,12 @@ const mockFiles = [
   export default function FilesPage() {
     return (
       <section className="p-4">
-        <h1 className="text-2xl font-bold mb-4">Your Files</h1>
+        <div className="flex justify-between items-center mb-4">
+          <h1 className="text-2xl font-bold">Your Files</h1>
+          <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+            Upload File
+          </button>
+        </div>
         <ul className="bg-white divide-y rounded shadow">
           {mockFiles.map((file, index) => (
             <li key={index} className="p-4 flex justify-between">

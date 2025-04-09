@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const mockFiles = [
   { name: "resume.pdf", uploadedAt: "2025-04-01" },
@@ -33,16 +34,33 @@ export default function FilesPage() {
       />
 
       <ul className="bg-white divide-y rounded shadow">
-        {filteredFiles.length > 0 ? (
-          filteredFiles.map((file, index) => (
-            <li key={index} className="p-4 flex justify-between">
-              <span>{file.name}</span>
-              <span className="text-sm text-gray-400">Uploaded {file.uploadedAt}</span>
-            </li>
-          ))
-        ) : (
-          <li className="p-4 text-center text-gray-500">No matching files found.</li>
-        )}
+        <AnimatePresence>
+          {filteredFiles.length > 0 ? (
+            filteredFiles.map((file, index) => (
+              <motion.li
+                key={index}
+                initial={{ opacity: 0, y: 5 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -5 }}
+                transition={{ duration: 0.2 }}
+                className="p-4 flex justify-between"
+              >
+                <span>{file.name}</span>
+                <span className="text-sm text-gray-400">Uploaded {file.uploadedAt}</span>
+              </motion.li>
+            ))
+          ) : (
+            <motion.li
+              key="no-files"
+              className="p-4 text-center text-gray-500"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              No matching files found.
+            </motion.li>
+          )}
+        </AnimatePresence>
       </ul>
     </section>
   );

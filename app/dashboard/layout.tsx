@@ -32,9 +32,13 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           ))}
         </nav>
       </aside>
-      <main className="flex-1 p-6">
-        {children}
-      </main>
+      <div className="flex-1 flex flex-col">
+        <header className="h-16 bg-white shadow-sm flex items-center justify-between px-6">
+          <h1 className="text-lg font-semibold">Dashboard</h1>
+          <div className="text-sm text-gray-600">User Name</div>
+        </header>
+        <main className="flex-1 p-6">{children}</main>
+      </div>
     </div>
   );
 }

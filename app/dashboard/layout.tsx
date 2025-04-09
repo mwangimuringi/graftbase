@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu } from "lucide-react";
+import { motion } from "framer-motion";
 
 const links = [
   { href: "/dashboard", label: "Home" },
@@ -19,7 +20,14 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row bg-gray-100 text-gray-900">
-      <aside className={`md:block ${showSidebar ? "block" : "hidden"} w-64 bg-white shadow-md p-4`}>
+      <motion.aside
+        initial={{ x: -300 }}
+        animate={{ x: showSidebar || typeof window !== "undefined" && window.innerWidth >= 768 ? 0 : -300 }}
+        transition={{ type: "spring", stiffness: 200 }}
+        className={`w-64 bg-white shadow-md p-4 absolute md:static z-20 ${
+          showSidebar ? "block" : "hidden md:block"
+        }`}
+      >
         <nav className="flex flex-col space-y-2">
           {links.map(({ href, label }) => (
             <Link
@@ -36,7 +44,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             </Link>
           ))}
         </nav>
-      </aside>
+      </motion.aside>
 
       <div className="flex-1 flex flex-col">
         <header className="h-16 bg-white shadow-sm flex items-center justify-between px-6">

@@ -1,5 +1,11 @@
 // app/dashboard/conversations/layout.tsx
-export default function ConversationsLayout({ children }: { children: React.ReactNode }) {
+export default function ConversationsLayout({
+    children,
+    title = "Conversations",
+  }: {
+    children: React.ReactNode;
+    title?: string;
+  }) {
     return (
       <div className="min-h-screen flex flex-col">
         <div className="flex flex-grow">
@@ -12,7 +18,7 @@ export default function ConversationsLayout({ children }: { children: React.Reac
           </aside>
           <div className="flex-grow">
             <header className="bg-blue-600 text-white p-4">
-              <h1 className="text-xl font-semibold">Conversations</h1>
+              <h1 className="text-xl font-semibold">{title}</h1>
             </header>
             <main className="p-4">{children}</main>
           </div>

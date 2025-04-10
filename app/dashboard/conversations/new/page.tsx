@@ -5,6 +5,7 @@ export default function NewConversationPage() {
   const [conversationTitle, setConversationTitle] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -17,7 +18,7 @@ export default function NewConversationPage() {
     // Logic for submitting the conversation (mocked for now)
     setTimeout(() => {
       setIsSubmitting(false);
-      alert("Conversation created successfully!");
+      setSuccess("Conversation created successfully!");
     }, 1000);
   };
 
@@ -27,6 +28,8 @@ export default function NewConversationPage() {
       <p className="mt-4 text-gray-600">
         Start a new conversation by filling in the details below.
       </p>
+
+      {success && <p className="text-green-500 mt-4">{success}</p>}
 
       <form className="mt-6" onSubmit={handleSubmit}>
         <div className="mb-4">

@@ -1,4 +1,5 @@
 // app/dashboard/conversations/page.tsx
+import Link from "next/link";
 import { useState } from "react";
 
 const mockConversations = [
@@ -27,7 +28,9 @@ export default function ConversationsPage() {
         {filteredConversations.length > 0 ? (
           filteredConversations.map((conversation) => (
             <li key={conversation.id} className="p-4">
-              <h3 className="font-semibold">{conversation.title}</h3>
+              <Link href={`/dashboard/conversations/${conversation.id}`} passHref>
+                <h3 className="font-semibold text-blue-600 hover:underline">{conversation.title}</h3>
+              </Link>
               <p className="text-sm text-gray-500">{conversation.lastMessage}</p>
               <span className="text-xs text-gray-400">Last message: {conversation.lastMessageTime}</span>
             </li>

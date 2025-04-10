@@ -24,7 +24,7 @@ export default function ConversationsLayout({
             <li>
               <a
                 href="/dashboard/conversations"
-                className="block py-2 text-sm hover:bg-blue-700"
+                className="block py-2 text-sm hover:bg-blue-700 focus:outline-none focus:bg-blue-700"
               >
                 Conversations
               </a>
@@ -32,7 +32,7 @@ export default function ConversationsLayout({
             <li>
               <a
                 href="/dashboard/conversations/new"
-                className="block py-2 text-sm hover:bg-blue-700"
+                className="block py-2 text-sm hover:bg-blue-700 focus:outline-none focus:bg-blue-700"
               >
                 New Conversation
               </a>

@@ -3,7 +3,7 @@ export default function ConversationsLayout({ children }: { children: React.Reac
     return (
       <div className="min-h-screen flex flex-col">
         <div className="flex flex-grow">
-          <aside className="w-64 bg-gray-800 text-white p-4">
+          <aside className="w-64 bg-gray-800 text-white p-4 hover:bg-gray-700">
             <h2 className="text-lg font-semibold mb-4">Dashboard</h2>
             <ul>
               <li><a href="/dashboard/conversations" className="block py-2 text-sm hover:bg-blue-700">Conversations</a></li>

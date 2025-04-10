@@ -24,13 +24,17 @@ export default function ConversationsPage() {
         className="w-full mb-4 px-3 py-2 border rounded"
       />
       <ul className="bg-white divide-y rounded shadow">
-        {filteredConversations.map((conversation) => (
-          <li key={conversation.id} className="p-4">
-            <h3 className="font-semibold">{conversation.title}</h3>
-            <p className="text-sm text-gray-500">{conversation.lastMessage}</p>
-            <span className="text-xs text-gray-400">Last message: {conversation.lastMessageTime}</span>
-          </li>
-        ))}
+        {filteredConversations.length > 0 ? (
+          filteredConversations.map((conversation) => (
+            <li key={conversation.id} className="p-4">
+              <h3 className="font-semibold">{conversation.title}</h3>
+              <p className="text-sm text-gray-500">{conversation.lastMessage}</p>
+              <span className="text-xs text-gray-400">Last message: {conversation.lastMessageTime}</span>
+            </li>
+          ))
+        ) : (
+          <li className="p-4 text-center text-gray-500">No conversations found.</li>
+        )}
       </ul>
     </section>
   );

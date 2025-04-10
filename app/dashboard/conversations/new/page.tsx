@@ -4,9 +4,15 @@ import { useState } from 'react';
 export default function NewConversationPage() {
   const [conversationTitle, setConversationTitle] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!conversationTitle) {
+      setError('Please enter a conversation title.');
+      return;
+    }
+    setError('');
     setIsSubmitting(true);
     // Logic for submitting the conversation (mocked for now)
     setTimeout(() => {
@@ -33,6 +39,7 @@ export default function NewConversationPage() {
             required
           />
         </div>
+        {error && <p className="text-red-500 text-sm">{error}</p>}
 
         <button
           type="submit"

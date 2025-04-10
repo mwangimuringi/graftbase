@@ -1,11 +1,13 @@
 // app/dashboard/conversations/new/page.tsx
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 export default function NewConversationPage() {
   const [conversationTitle, setConversationTitle] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const router = useRouter();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -63,6 +65,13 @@ export default function NewConversationPage() {
           )}
         </button>
       </form>
+
+      <button
+        onClick={() => router.push("/dashboard/conversations")}
+        className="mt-6 w-full p-2 text-gray-600 border border-gray-300 rounded-md"
+      >
+        Back to Conversations
+      </button>
     </div>
   );
 }

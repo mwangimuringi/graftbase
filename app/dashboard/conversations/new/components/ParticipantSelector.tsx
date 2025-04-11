@@ -1,5 +1,5 @@
 // app/dashboard/conversations/new/components/ParticipantSelector.tsx
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const mockParticipants = [
   { id: 1, name: 'Alice Kim' },
@@ -7,7 +7,11 @@ const mockParticipants = [
   { id: 3, name: 'Carlos Garcia' },
 ];
 
-export default function ParticipantSelector() {
+interface Props {
+  onChange: (selectedIds: number[]) => void;
+}
+
+export default function ParticipantSelector({ onChange }: Props) {
   const [selected, setSelected] = useState<number[]>([]);
 
   const handleToggle = (id: number) => {
@@ -15,6 +19,10 @@ export default function ParticipantSelector() {
       prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]
     );
   };
+
+  useEffect(() => {
+    onChange(selected);
+  }, [selected, onChange]);
 
   return (
     <div className="mb-4">

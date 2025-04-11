@@ -1,6 +1,6 @@
 // app/dashboard/conversations/new/components/ConversationForm.tsx
-import { useState } from 'react';
-import ParticipantSelector from './ParticipantSelector';
+import { useState } from "react";
+import ParticipantSelector from "./ParticipantSelector";
 
 export default function ConversationForm() {
   const [participants, setParticipants] = useState<number[]>([]);
@@ -23,17 +23,17 @@ export default function ConversationForm() {
         />
       </div>
       <div>
-  <label htmlFor="description" className="block text-sm font-medium">
-    Description (optional)
-  </label>
-  <textarea
-    id="description"
-    name="description"
-    rows={3}
-    className="mt-1 w-full border border-gray-300 rounded-md p-2"
-    placeholder="What is this conversation about?"
-  />
-</div>
+        <label htmlFor="description" className="block text-sm font-medium">
+          Description (optional)
+        </label>
+        <textarea
+          id="description"
+          name="description"
+          rows={3}
+          className="mt-1 w-full border border-gray-300 rounded-md p-2"
+          placeholder="What is this conversation about?"
+        />
+      </div>
       <ParticipantSelector onChange={setParticipants} />
     </form>
   );

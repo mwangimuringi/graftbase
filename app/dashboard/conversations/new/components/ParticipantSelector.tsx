@@ -1,11 +1,11 @@
 // app/dashboard/conversations/new/components/ParticipantSelector.tsx
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 const mockParticipants = [
-  { id: 1, name: 'Alice Kim' },
-  { id: 2, name: 'Brian Lee' },
-  { id: 3, name: 'Carlos Garcia' },
-  { id: 4, name: 'Dana White' },
+  { id: 1, name: "Alice Kim" },
+  { id: 2, name: "Brian Lee" },
+  { id: 3, name: "Carlos Garcia" },
+  { id: 4, name: "Dana White" },
 ];
 
 interface Props {
@@ -14,7 +14,7 @@ interface Props {
 
 export default function ParticipantSelector({ onChange }: Props) {
   const [selected, setSelected] = useState<number[]>([]);
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
 
   const handleToggle = (id: number) => {
     setSelected((prev) =>
@@ -42,7 +42,13 @@ export default function ParticipantSelector({ onChange }: Props) {
       />
       <ul className="space-y-2 max-h-48 overflow-y-auto">
         {filtered.map((p) => (
-          <li key={p.id} className="flex items-center">
+          // Inside the `li` element
+          <li
+            key={p.id}
+            className={`flex items-center p-2 rounded-md ${
+              selected.includes(p.id) ? "bg-blue-50" : ""
+            }`}
+          >
             <input
               type="checkbox"
               id={`participant-${p.id}`}

@@ -49,13 +49,24 @@ export default function ParticipantSelector({ onChange }: Props) {
               selected.includes(p.id) ? "bg-blue-50" : ""
             }`}
           >
-            <input
-              type="checkbox"
-              id={`participant-${p.id}`}
-              checked={selected.includes(p.id)}
-              onChange={() => handleToggle(p.id)}
-              className="mr-2"
-            />
+            // Add these buttons above <ul>
+<div className="flex justify-end mb-2 gap-2">
+  <button
+    type="button"
+    onClick={() => setSelected([])}
+    className="text-sm text-gray-600 underline"
+  >
+    Clear All
+  </button>
+  <button
+    type="button"
+    onClick={() => setSelected(mockParticipants.map((p) => p.id))}
+    className="text-sm text-blue-600 underline"
+  >
+    Select All
+  </button>
+</div>
+
             <label htmlFor={`participant-${p.id}`}>{p.name}</label>
           </li>
         ))}

@@ -66,7 +66,6 @@ export default function ParticipantSelector({ onChange }: Props) {
     Select All
   </button>
 </div>
-
             <label htmlFor={`participant-${p.id}`}>{p.name}</label>
           </li>
         ))}

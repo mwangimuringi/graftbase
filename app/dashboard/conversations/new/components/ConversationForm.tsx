@@ -22,7 +22,18 @@ export default function ConversationForm() {
           required
         />
       </div>
-
+      <div>
+  <label htmlFor="description" className="block text-sm font-medium">
+    Description (optional)
+  </label>
+  <textarea
+    id="description"
+    name="description"
+    rows={3}
+    className="mt-1 w-full border border-gray-300 rounded-md p-2"
+    placeholder="What is this conversation about?"
+  />
+</div>
       <ParticipantSelector onChange={setParticipants} />
     </form>
   );

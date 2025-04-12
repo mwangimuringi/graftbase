@@ -47,7 +47,7 @@ export default function ConversationsLayout({
         </div>
       </div>
       <footer className="bg-gray-800 text-white p-4 text-center">
-        <p>&copy; 2025 , All rights reserved</p>
+        <p>&copy; 2025 graftbase.com</p>
       </footer>
     </div>
   );

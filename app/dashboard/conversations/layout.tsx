@@ -27,6 +27,7 @@ export default function ConversationsLayout({
                 className="block py-2 text-sm hover:bg-blue-700 focus:outline-none focus:bg-blue-700"
               >
                 Conversations
+                <span className="ml-2 text-xs text-gray-400"></span>
               </a>
             </li>
             <li>

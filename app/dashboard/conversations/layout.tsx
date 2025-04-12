@@ -34,7 +34,7 @@ export default function ConversationsLayout({
                 href="/dashboard/conversations/new"
                 className="block py-2 text-sm hover:bg-blue-700 focus:outline-none focus:bg-blue-700"
               >
-                New Conversation
+                Great Conversation
               </a>
             </li>
           </ul>

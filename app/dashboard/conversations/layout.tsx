@@ -11,6 +11,8 @@ export default function ConversationsLayout({
       <div className="flex flex-grow">
         <aside className="w-64 bg-gray-800 text-white p-4 hover:bg-gray-700">
           <div className="mb-6">
+
+            
             <img
               src="/profile.jpg"
               alt="User"

@@ -1,3 +1,9 @@
+interface Product {
+    id: number
+    name: string
+    price: number
+  }
+
 export async function GET() {
     const products = [
       { id: 1, name: 'Product A', price: 19.99 },

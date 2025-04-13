@@ -1,12 +1,14 @@
-const products: Product[] = []
-
-export async function GET() {
-  return Response.json(products)
-}
-
 export async function POST(request: Request) {
-  const body = await request.json()
-  const newProduct = { id: Date.now(), ...body }
-  products.push(newProduct)
-  return Response.json(newProduct, { status: 201 })
-}
+    try {
+      const body = await request.json()
+      if (!body.name || !body.price) {
+        return Response.json({ error: 'Name and price are required' }, { status: 400 })
+      }
+      const newProduct = { id: Date.now(), ...body }
+      products.push(newProduct)
+      return Response.json(newProduct, { status: 201 })
+    } catch (error) {
+      return Response.json({ error: 'Invalid JSON' }, { status: 400 })
+    }
+  }
+  

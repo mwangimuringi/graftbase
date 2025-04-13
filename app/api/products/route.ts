@@ -12,3 +12,7 @@ export async function GET() {
     return Response.json({ message: 'Product created', product: body }, { status: 201 })
   }
   
+  if (!body.name || !body.price) {
+    return Response.json({ error: 'Name and price are required' }, { status: 400 })
+  }
+  

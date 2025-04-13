@@ -1,7 +1,8 @@
-import { Router } from 'express';
-import { ProductController } from './controller';
-
-export const productsRouter = Router();
-
-productsRouter.get('/', ProductController.getAll);
-productsRouter.get('/:id', ProductController.getOne);
+export async function GET() {
+    const products = [
+      { id: 1, name: 'Product A', price: 19.99 },
+      { id: 2, name: 'Product B', price: 29.99 }
+    ]
+    return Response.json(products)
+  }
+  

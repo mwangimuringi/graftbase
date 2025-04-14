@@ -6,7 +6,11 @@ const { Product } = require('graft/server/entities');
 const { Product } = require('graft/server/entities');
 const Product = require('graft/server/entities/Product');
 
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
+export async function DELETE(req: Request, { params }: { params: { id: string, slug: string } }) {
+    const product = await prisma.product.findUnique({ where: { id: params.id } });
+    if (!product) {
+      return NextResponse.json({ error: 'Product not found' }, { status: 404 });
+    }
     await prisma.product.delete({ where: { id: params.id } });
     return NextResponse.json({ message: 'Product deleted' });
   }

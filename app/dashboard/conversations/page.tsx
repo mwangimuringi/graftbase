@@ -73,6 +73,14 @@ export default function ConversationsPage() {
             No conversations found.
           </li>
         )}
+
+        <li className="p-4 text-center text-gray-500">
+          <Link href="/dashboard/conversations/new" passHref>
+            <a className="text-blue-600 hover:underline">
+              Create a new conversation
+            </a>
+          </Link>
+        </li>
       </ul>
     </section>
   );

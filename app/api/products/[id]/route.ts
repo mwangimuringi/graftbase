@@ -2,7 +2,10 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 
-const { Product } = require('graft/server/entities');
+export async function GET(req: Request, { params }: { params: { id: string } }) {
+    const product = await prisma.product.findUnique({ where: { id: params.id } });
+    return NextResponse.json(product);
+  }
 
 export async function DELETE(req: Request, { params }: { params: { id: string, slug: string } }) {
     const product = await prisma.product.findUnique({ where: { id: params.id } });

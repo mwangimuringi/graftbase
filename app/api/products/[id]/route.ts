@@ -1,7 +1,6 @@
-import { defineRoute } from 'graft/server';
-import { Product } from 'graft/server/entities';
+// /app/api/products/[id]/route.ts
 import { NextResponse } from 'next/server';
-import { Request } from 'express';
+import prisma from '@/lib/prisma';
 
 const { Product } = require('graft/server/entities');
 

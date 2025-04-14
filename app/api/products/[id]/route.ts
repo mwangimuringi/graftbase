@@ -1,10 +1,9 @@
 import { defineRoute } from 'graft/server';
 import { Product } from 'graft/server/entities';
+import { NextResponse } from 'next/server';
+import { Request } from 'express';
 
 const { Product } = require('graft/server/entities');
-
-const { Product } = require('graft/server/entities');
-const Product = require('graft/server/entities/Product');
 
 export async function DELETE(req: Request, { params }: { params: { id: string, slug: string } }) {
     const product = await prisma.product.findUnique({ where: { id: params.id } });

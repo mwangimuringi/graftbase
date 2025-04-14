@@ -7,6 +7,15 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
     return NextResponse.json(product);
   }
 
+  export async function PUT(req: Request, { params }: { params: { id: string } }) {
+    const data = await req.json();
+    const updated = await prisma.product.update({
+      where: { id: params.id },
+      data,
+    });
+    return NextResponse.json(updated);
+  }
+
 export async function DELETE(req: Request, { params }: { params: { id: string, slug: string } }) {
     const product = await prisma.product.findUnique({ where: { id: params.id } });
     if (!product) {

@@ -11,3 +11,7 @@ export function formatPrice(value: number, locale: string = 'en-US', currency: s
     return text.length > maxLength ? text.slice(0, maxLength) + '...' : text;
   }
   
+  export function capitalizeFirstLetter(str: string): string {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+  

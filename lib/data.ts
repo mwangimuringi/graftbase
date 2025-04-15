@@ -6,3 +6,11 @@ export const fakeProducts = [
     { id: '3', name: 'Headphones', price: 199, description: 'Noise-cancelling wireless headphones.' },
   ];
   
+  export async function getAllProducts() {
+    return fakeProducts;
+  }
+  
+  export async function getProductById(id: string) {
+    return fakeProducts.find((p) => p.id === id);
+  }
+  

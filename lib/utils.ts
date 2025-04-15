@@ -1,7 +1,10 @@
 // /lib/utils.ts
 
-export function formatPrice(value: number): string {
-    return `$${value.toFixed(2)}`;
+export function formatPrice(value: number, locale: string = 'en-US', currency: string = 'USD'): string {
+    return new Intl.NumberFormat(locale, {
+      style: 'currency',
+      currency,
+    }).format(value);
   }
   
   export function truncate(text: string, maxLength: number = 100): string {

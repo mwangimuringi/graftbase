@@ -32,11 +32,17 @@ export interface Product {
     },
   ];
   
+  function sleep(ms: number) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+  
   export async function getAllProducts(): Promise<Product[]> {
+    await sleep(300); // simulate network delay
     return fakeProducts;
   }
   
   export async function getProductById(id: string): Promise<Product | undefined> {
+    await sleep(200); // simulate network delay
     return fakeProducts.find((p) => p.id === id);
   }
   

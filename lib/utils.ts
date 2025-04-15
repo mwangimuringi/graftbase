@@ -15,3 +15,7 @@ export function formatPrice(value: number, locale: string = 'en-US', currency: s
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
   
+  export function generateId(prefix: string = 'id'): string {
+    return `${prefix}-${Math.random().toString(36).substr(2, 9)}`;
+  }
+  

@@ -1,6 +1,14 @@
 // /lib/data.ts
 
-export const fakeProducts = [
+export interface Product {
+    id: string;
+    name: string;
+    price: number;
+    description: string;
+    imageUrl: string;
+  }
+  
+  export const fakeProducts: Product[] = [
     {
       id: '1',
       name: 'Laptop',
@@ -23,4 +31,12 @@ export const fakeProducts = [
       imageUrl: '/images/headphones.jpg',
     },
   ];
+  
+  export async function getAllProducts(): Promise<Product[]> {
+    return fakeProducts;
+  }
+  
+  export async function getProductById(id: string): Promise<Product | undefined> {
+    return fakeProducts.find((p) => p.id === id);
+  }
   

@@ -23,3 +23,10 @@ export function formatPrice(value: number, locale: string = 'en-US', currency: s
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
   
+  export function slugify(str: string): string {
+    return str
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/(^-|-$)/g, '');
+  }
+  

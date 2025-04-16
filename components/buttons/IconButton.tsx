@@ -8,11 +8,13 @@ type IconButtonProps = {
     className?: string;
     ariaLabel?: string;
     disabled?: boolean;
+    type?: 'button' | 'submit' | 'reset';
   };
 
 const IconButton: React.FC<IconButtonProps> = ({ icon, onClick }) => {
   return (
     <button
+    type={type || 'button'}
       onClick={onClick}
       className={`p-2 rounded-full hover:bg-gray-200 transition ${className}`}
       aria-label={ariaLabel}

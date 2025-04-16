@@ -1,3 +1,5 @@
+import { Loader2 } from 'lucide-react';
+
 type PrimaryButtonProps = {
     children: React.ReactNode;
     onClick?: () => void;

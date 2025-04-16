@@ -15,3 +15,9 @@ type PrimaryButtonProps = {
     ${className}
   `}
 >
+className={`
+  px-4 py-2 rounded-md text-white transition flex items-center justify-center
+  ${disabled ? 'bg-blue-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'}
+  ${fullWidth ? 'w-full' : ''}
+  ${className}
+`}

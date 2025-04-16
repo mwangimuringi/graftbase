@@ -1,6 +1,7 @@
 // components/buttons/IconButton.tsx
 
 import React from "react";
+import { Loader2 } from 'lucide-react';
 
 type IconButtonProps = {
     icon: React.ReactNode;

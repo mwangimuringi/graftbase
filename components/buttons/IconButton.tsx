@@ -3,10 +3,12 @@
 import React from "react";
 
 type IconButtonProps = {
-  icon: React.ReactNode;
-  onClick?: () => void;
-  className?: string;
-};
+    icon: React.ReactNode;
+    onClick?: () => void;
+    className?: string;
+    ariaLabel?: string;
+    disabled?: boolean;
+  };
 
 const IconButton: React.FC<IconButtonProps> = ({ icon, onClick }) => {
   return (

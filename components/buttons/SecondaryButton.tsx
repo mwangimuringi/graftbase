@@ -13,3 +13,14 @@ type SecondaryButtonProps = {
   fullWidth?: boolean;
   size?: 'sm' | 'md' | 'lg';
 };
+
+export const SecondaryButton: React.FC<SecondaryButtonProps> = ({
+  children,
+  onClick,
+  className = '',
+  type = 'button',
+  disabled = false,
+  loading = false,
+  fullWidth = false,
+  size = 'md',
+})

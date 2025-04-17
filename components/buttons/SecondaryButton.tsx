@@ -46,3 +46,9 @@ export const SecondaryButton: React.FC<SecondaryButtonProps> = ({
         ${className}
       `}
       // style={{ backgroundColor: disabled ? '#ccc' : '#fff' }}
+      // disabled={disabled}
+    >
+      {loading ? <Loader2 className="w-4 h-4 animate-spin text-white" /> : children}
+    </button>
+  );
+};

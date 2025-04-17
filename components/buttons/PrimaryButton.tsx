@@ -12,8 +12,6 @@ type PrimaryButtonProps = {
   size?: 'sm' | 'md' | 'lg';
 };
 
-
-
 const PrimaryButton: React.FC<PrimaryButtonProps> = ({
   children,
   onClick,

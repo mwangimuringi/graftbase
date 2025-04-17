@@ -53,11 +53,10 @@ export const SecondaryButton: React.FC<SecondaryButtonProps> = ({
   );
 };
 
-SecondaryButton.defaultProps = {
-  type: 'button',
-  disabled: false,
-  loading: false,
-  fullWidth: false,
-  size: 'md',
+SecondaryButton.defaultProps = { 
+    type: 'button',
+    disabled: false,
+    loading: false,
+    fullWidth: false,
+    size: 'md',
 };
-

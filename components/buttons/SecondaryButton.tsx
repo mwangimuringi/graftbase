@@ -61,6 +61,3 @@ SecondaryButton.defaultProps = {
   size: 'md',
 };
 
-
-
-SecondaryButton.displayName = 'SecondaryButton';

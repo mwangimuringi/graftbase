@@ -45,3 +45,4 @@ export const SecondaryButton: React.FC<SecondaryButtonProps> = ({
         ${fullWidth ? 'w-full' : ''}
         ${className}
       `}
+      // style={{ backgroundColor: disabled ? '#ccc' : '#fff' }}

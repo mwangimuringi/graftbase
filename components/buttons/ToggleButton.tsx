@@ -31,6 +31,8 @@ export const ToggleButton: React.FC<ToggleButtonProps> = ({
     <button
       onClick={toggle}
       disabled={disabled}
+      aria-pressed={active}
+      aria-disabled={disabled}
       className={`px-4 py-2 rounded text-white transition ${
         disabled
           ? 'bg-gray-400 cursor-not-allowed'

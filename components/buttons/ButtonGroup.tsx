@@ -4,15 +4,19 @@ interface ButtonGroupProps {
   labels: string[];
   onClick?: (label: string, index: number) => void;
   selectedIndex?: number;
+  fullWidth?: boolean;
+  gap?: number;
 }
 
 export const ButtonGroup: React.FC<ButtonGroupProps> = ({
   labels,
   onClick,
   selectedIndex,
+  fullWidth = false,
+  gap = 2,
 }) => {
   return (
-    <div className="flex gap-2">
+    <div className={`flex gap-${gap} ${fullWidth ? 'w-full' : ''}`}>
       {labels.map((label, idx) => (
         <button
           key={idx}

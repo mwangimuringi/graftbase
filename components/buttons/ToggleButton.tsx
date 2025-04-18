@@ -1,24 +1,37 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 interface ToggleButtonProps {
+  isOn?: boolean;
+  onToggle?: (value: boolean) => void;
   onLabel?: string;
   offLabel?: string;
 }
 
 export const ToggleButton: React.FC<ToggleButtonProps> = ({
+  isOn,
+  onToggle,
   onLabel = 'On',
   offLabel = 'Off',
 }) => {
-  const [isOn, setIsOn] = useState(false);
+  const [internalState, setInternalState] = React.useState(false);
+  const active = isOn !== undefined ? isOn : internalState;
+
+  const toggle = () => {
+    if (onToggle) {
+      onToggle(!active);
+    } else {
+      setInternalState(!active);
+    }
+  };
 
   return (
     <button
-      onClick={() => setIsOn(prev => !prev)}
+      onClick={toggle}
       className={`px-4 py-2 rounded text-white ${
-        isOn ? 'bg-green-400' : 'bg-red-400'
+        active ? 'bg-green-400' : 'bg-red-400'
       }`}
     >
-      {isOn ? onLabel : offLabel}
+      {active ? onLabel : offLabel}
     </button>
   );
 };

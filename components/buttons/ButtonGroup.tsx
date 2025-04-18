@@ -21,6 +21,7 @@ export const ButtonGroup: React.FC<ButtonGroupProps> = ({
         <button
           key={idx}
           onClick={() => onClick?.(label, idx)}
+          aria-pressed={selectedIndex === idx}
           className={`px-3 py-1 rounded border ${
             selectedIndex === idx ? 'bg-blue-500 text-white' : 'bg-gray-100'
           }`}

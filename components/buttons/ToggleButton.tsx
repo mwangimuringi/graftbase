@@ -1,6 +1,14 @@
 import React, { useState } from 'react';
 
-export const ToggleButton = () => {
+interface ToggleButtonProps {
+  onLabel?: string;
+  offLabel?: string;
+}
+
+export const ToggleButton: React.FC<ToggleButtonProps> = ({
+  onLabel = 'On',
+  offLabel = 'Off',
+}) => {
   const [isOn, setIsOn] = useState(false);
 
   return (
@@ -10,7 +18,7 @@ export const ToggleButton = () => {
         isOn ? 'bg-green-400' : 'bg-red-400'
       }`}
     >
-      {isOn ? 'On' : 'Off'}
+      {isOn ? onLabel : offLabel}
     </button>
   );
 };

@@ -5,6 +5,7 @@ interface ToggleButtonProps {
   onToggle?: (value: boolean) => void;
   onLabel?: string;
   offLabel?: string;
+  disabled?: boolean;
 }
 
 export const ToggleButton: React.FC<ToggleButtonProps> = ({
@@ -12,11 +13,13 @@ export const ToggleButton: React.FC<ToggleButtonProps> = ({
   onToggle,
   onLabel = 'On',
   offLabel = 'Off',
+  disabled = false,
 }) => {
   const [internalState, setInternalState] = React.useState(false);
   const active = isOn !== undefined ? isOn : internalState;
 
   const toggle = () => {
+    if (disabled) return;
     if (onToggle) {
       onToggle(!active);
     } else {
@@ -27,8 +30,13 @@ export const ToggleButton: React.FC<ToggleButtonProps> = ({
   return (
     <button
       onClick={toggle}
-      className={`px-4 py-2 rounded text-white ${
-        active ? 'bg-green-400' : 'bg-red-400'
+      disabled={disabled}
+      className={`px-4 py-2 rounded text-white transition ${
+        disabled
+          ? 'bg-gray-400 cursor-not-allowed'
+          : active
+          ? 'bg-green-400'
+          : 'bg-red-400'
       }`}
     >
       {active ? onLabel : offLabel}

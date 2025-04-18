@@ -1,10 +1,15 @@
 import React from 'react';
 
-export const ButtonGroup = () => {
+interface ButtonGroupProps {
+  labels: string[];
+}
+
+export const ButtonGroup: React.FC<ButtonGroupProps> = ({ labels }) => {
   return (
     <div className="flex gap-2">
-      <button>One</button>
-      <button>Two</button>
+      {labels.map((label, idx) => (
+        <button key={idx}>{label}</button>
+      ))}
     </div>
   );
 };

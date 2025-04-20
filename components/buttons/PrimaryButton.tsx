@@ -1,3 +1,6 @@
+// PrimaryButton.tsx
+import React from 'react';
+
 type Props = {
   label: string;
   onClick?: () => void;
@@ -26,3 +29,7 @@ const PrimaryButton: React.FC<Props> = ({
     </button>
   );
 };
+
+PrimaryButton.displayName = 'PrimaryButton';
+
+export default PrimaryButton;

@@ -1,12 +1,15 @@
 // PrimaryButton.tsx
 import React from 'react';
 
-const PrimaryButton = () => {
+type Props = {
+  label: string;
+};
+
+const PrimaryButton = ({ label }: Props) => {
   return (
     <button>
-      Primary
+      {label}
     </button>
   );
 };
 
-export default PrimaryButton;

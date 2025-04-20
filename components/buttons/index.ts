@@ -1,5 +1,3 @@
-export {
-  ButtonGroup,
-  SecondaryButton,
-  ToggleButton,
-} from './components';
+export { ButtonGroup } from './ButtonGroup';
+export { SecondaryButton } from './SecondaryButton';
+export { ToggleButton } from './ToggleButton';

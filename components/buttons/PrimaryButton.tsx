@@ -15,9 +15,6 @@ const PrimaryButton: React.FC<Props> = ({
   disabled = false,]
   fullWidth = false,
   className = '',
-
-
-
   
 }) => {
   return (

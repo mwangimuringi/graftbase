@@ -14,8 +14,8 @@ const PrimaryButton: React.FC<Props> = ({
   onClick = () => {},
   disabled = false,]
   fullWidth = false,
-  className = '',
-  
+  className = 'default',
+
 }) => {
   return (
     <button

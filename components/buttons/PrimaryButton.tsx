@@ -12,7 +12,7 @@ type Props = {
 const PrimaryButton: React.FC<Props> = ({
   label,
   onClick = () => {},
-  disabled = false,
+  disabled = false,]
   fullWidth = false,
   className = '',
 }) => {

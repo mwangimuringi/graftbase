@@ -34,7 +34,7 @@ export default function ConversationsPage() {
       <section className="p-4">
         <h1 className="text-2xl font-bold mb-4">Your Conversations</h1>
         <p>Loading...</p>
-      </section>lllllllllllllllllllllllllllllll 987yt
+      </section>987yt
     );
   }
 

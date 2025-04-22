@@ -9,3 +9,5 @@ useEffect(() => {
   }, [onClose]);
   
   <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center transition-opacity duration-300 opacity-100">
+<div onClick={onClose} className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+  <div onClick={(e) => e.stopPropagation()} className="bg-white p-4 rounded">

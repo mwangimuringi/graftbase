@@ -22,6 +22,8 @@ interface ModalProps {
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [onClose]);
+  // TODO: Implement tab key focus trap for better keyboard navigation
+
 
   <div
   onClick={(e) => e.stopPropagation()}

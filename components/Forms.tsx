@@ -1,18 +1,23 @@
-interface ModalProps {
-    isOpen: boolean;
-    onClose: () => void;
-    title?: string;
-    children: React.ReactNode;
-  }
+// Modal.tsx
+import React, { useEffect } from 'react';
 
-  interface ModalProps {
-    ...
-    footer?: React.ReactNode;
-  }
-  
-  {children}
-  {footer && <div className="mt-4">{footer}</div>}
-  
+interface ModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  title?: string;
+  footer?: React.ReactNode;
+  className?: string;
+  children: React.ReactNode;
+}
+
+const Modal: React.FC<ModalProps> = ({
+  isOpen,
+  onClose,
+  title,
+  footer,
+  className,
+  children,
+}) => {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -22,16 +27,32 @@ interface ModalProps {
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [onClose]);
-  // TODO: Implement tab key focus trap for better keyboard navigation
 
+  if (!isOpen) return null;
 
-  <div
-  onClick={(e) => e.stopPropagation()}
-  className={`bg-white p-4 rounded ${className ?? 'w-96'}`}
->
-  
+  return (
+    <div
+      className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center transition-opacity duration-300 opacity-100 z-50"
+      onClick={onClose}
+    >
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-title"
+        onClick={(e) => e.stopPropagation()}
+        className={`bg-white p-6 rounded-lg shadow-lg ${className ?? 'w-96'}`}
+      >
+        {title && (
+          <h2 id="modal-title" className="text-lg font-semibold mb-4">
+            {title}
+          </h2>
+        )}
+        <div>{children}</div>
+        {footer && <div className="mt-6">{footer}</div>}
+        {/* TODO: Implement tab key focus trap for better keyboard navigation */}
+      </div>
+    </div>
+  );
+};
 
-  
-  <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center transition-opacity duration-300 opacity-100">
-<div onClick={onClose} className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-  <div onClick={(e) => e.stopPropagation()} className="bg-white p-4 rounded">
+export default Modal;

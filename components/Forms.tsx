@@ -4,6 +4,15 @@ interface ModalProps {
     title?: string;
     children: React.ReactNode;
   }
+
+  interface ModalProps {
+    ...
+    footer?: React.ReactNode;
+  }
+  
+  {children}
+  {footer && <div className="mt-4">{footer}</div>}
+  
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {

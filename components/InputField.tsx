@@ -1,12 +1,16 @@
 'use client';
 
-import React from 'react';
+import React, { InputHTMLAttributes } from 'react';
 
-const InputField = () => {
+interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
+  label: string;
+}
+
+const InputField = ({ label, ...props }: InputFieldProps) => {
   return (
     <div>
-      <label>Label</label>
-      <input type="text" />
+      <label>{label}</label>
+      <input {...props} />
     </div>
   );
 };

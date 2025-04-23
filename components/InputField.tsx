@@ -1,6 +1,7 @@
-"use client";
+'use client';
 
-import React, { InputHTMLAttributes } from "react";
+import React, { InputHTMLAttributes } from 'react';
+import clsx from 'clsx';
 
 interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
@@ -16,7 +17,12 @@ const InputField = React.forwardRef<HTMLInputElement, InputFieldProps>(
         </label>
         <input
           ref={ref}
-          className="block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none sm:text-sm"
+          className={clsx(
+            'block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none sm:text-sm',
+            error
+              ? 'border-red-500 focus:ring-red-500 focus:border-red-500'
+              : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500'
+          )}
           {...props}
         />
         {error && <p className="mt-1 text-xs text-red-500">{error}</p>}
@@ -25,6 +31,6 @@ const InputField = React.forwardRef<HTMLInputElement, InputFieldProps>(
   }
 );
 
-InputField.displayName = "InputField";
+InputField.displayName = 'InputField';
 
 export default InputField;

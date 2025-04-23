@@ -20,7 +20,7 @@ const Tooltip = ({ text, children, position = 'top' }: TooltipProps) => {
     <span className="relative group inline-block">
       {children}
       <div
-        className={`absolute hidden group-hover:block z-10 ${positionStyles[position]}`}
+        className={`absolute opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10 ${positionStyles[position]}`}
       >
         <div className="bg-black text-white text-xs px-2 py-1 rounded">
           {text}

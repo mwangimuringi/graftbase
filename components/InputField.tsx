@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import React, { InputHTMLAttributes } from 'react';
+import React, { InputHTMLAttributes } from "react";
 
 interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
@@ -10,15 +10,21 @@ interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
 const InputField = React.forwardRef<HTMLInputElement, InputFieldProps>(
   ({ label, error, ...props }, ref) => {
     return (
-      <div>
-        <label>{label}</label>
-        <input ref={ref} {...props} />
-        {error && <p>{error}</p>}
+      <div className="w-full">
+        <label className="block text-sm font-medium text-gray-700 mb-1">
+          {label}
+        </label>
+        <input
+          ref={ref}
+          className="block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none sm:text-sm"
+          {...props}
+        />
+        {error && <p className="mt-1 text-xs text-red-500">{error}</p>}
       </div>
     );
   }
 );
 
-InputField.displayName = 'InputField';
+InputField.displayName = "InputField";
 
 export default InputField;

@@ -6,13 +6,17 @@ interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
 }
 
-const InputField = ({ label, ...props }: InputFieldProps) => {
-  return (
-    <div>
-      <label>{label}</label>
-      <input {...props} />
-    </div>
-  );
-};
+const InputField = React.forwardRef<HTMLInputElement, InputFieldProps>(
+  ({ label, ...props }, ref) => {
+    return (
+      <div>
+        <label>{label}</label>
+        <input ref={ref} {...props} />
+      </div>
+    );
+  }
+);
+
+InputField.displayName = 'InputField';
 
 export default InputField;

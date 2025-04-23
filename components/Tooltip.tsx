@@ -11,9 +11,12 @@ const Tooltip = ({ text, children }: TooltipProps) => {
   return (
     <span className="relative group inline-block">
       {children}
-      <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block bg-black text-white text-xs px-2 py-1 rounded transition-opacity duration-200">
-        {text}
-      </span>
+      <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block z-10">
+        <div className="bg-black text-white text-xs px-2 py-1 rounded">
+          {text}
+        </div>
+        <div className="w-2 h-2 bg-black rotate-45 mx-auto mt-[-4px]" />
+      </div>
     </span>
   );
 };

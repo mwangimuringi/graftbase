@@ -3,7 +3,12 @@
 import React from 'react';
 
 const InputField = () => {
-  return <input type="text" />;
+  return (
+    <div>
+      <label>Label</label>
+      <input type="text" />
+    </div>
+  );
 };
 
 export default InputField;

@@ -16,29 +16,36 @@ const positionStyles: Record<string, string> = {
   left: 'right-full top-1/2 -translate-y-1/2 mr-2',
 };
 
-const Tooltip = ({ text, children, position = 'top', delay = 0 }: TooltipProps) => {
-  const [show, setShow] = useState(false);
+const Tooltip = ({
+  text,
+  children,
+  position = 'top',
+  delay = 0,
+}: TooltipProps) => {
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     let timer: NodeJS.Timeout;
-    if (show && delay > 0) {
-      timer = setTimeout(() => setShow(true), delay);
+    if (visible && delay > 0) {
+      timer = setTimeout(() => setVisible(true), delay);
     }
     return () => clearTimeout(timer);
-  }, [show, delay]);
+  }, [visible, delay]);
 
   return (
     <span
       className="relative group inline-block"
-      onMouseEnter={() => setShow(true)}
-      onMouseLeave={() => setShow(false)}
+      onMouseEnter={() => setVisible(true)}
+      onMouseLeave={() => setVisible(false)}
+      aria-label={text}
     >
       {children}
-      {show && (
+      {visible && (
         <div
+          role="tooltip"
           className={`absolute transition-opacity duration-200 z-10 ${positionStyles[position]}`}
         >
-          <div className="bg-black text-white text-xs px-2 py-1 rounded">
+          <div className="bg-black text-white dark:bg-gray-800 dark:text-white text-xs px-2 py-1 rounded">
             {text}
           </div>
         </div>

@@ -23,6 +23,7 @@ const Tooltip = ({
   delay = 0,
 }: TooltipProps) => {
   const [visible, setVisible] = useState(false);
+  
 
   useEffect(() => {
     let timer: NodeJS.Timeout;

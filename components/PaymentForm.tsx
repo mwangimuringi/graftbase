@@ -17,8 +17,15 @@ const PaymentForm = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Payment info submitted:', formData);
-  };
+  
+    const { name, cardNumber, expiry, cvv } = formData;
+    if (!name || !cardNumber || !expiry || !cvv) {
+      alert('Please fill in all fields');
+      return;
+    }
+  
+    console.log('Processing payment...', formData);
+  };  
 
   return (
     <form  onSubmit={handleSubmit}>

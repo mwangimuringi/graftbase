@@ -13,6 +13,11 @@ const PaymentForm = () => {
   ) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+    setTimeout(() => {
+        alert('Payment successful!');
+        setFormData({ name: '', cardNumber: '', expiry: '', cvv: '' });
+        setIsSubmitting(false);
+      }, 1500);      
   };
 
   const handleSubmit = (e: React.FormEvent) => {

@@ -27,6 +27,23 @@ const PaymentForm = () => {
     console.log('Processing payment...', formData);
   };  
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+const handleSubmit = (e: React.FormEvent) => {
+  e.preventDefault();
+  const { name, cardNumber, expiry, cvv } = formData;
+  if (!name || !cardNumber || !expiry || !cvv) {
+    alert('Please fill in all fields');
+    return;
+  }
+
+  setIsSubmitting(true);
+  setTimeout(() => {
+    alert('Payment successful!');
+    setIsSubmitting(false);
+  }, 1500);
+};
+
   return (
     <form  onSubmit={handleSubmit}>
       <h2>Payment Details</h2>

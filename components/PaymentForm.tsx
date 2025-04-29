@@ -8,6 +8,13 @@ const PaymentForm = () => {
     cvv: ''
   });
 
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
   return (
     <form>
       <h2>Payment Details</h2>

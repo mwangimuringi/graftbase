@@ -91,15 +91,16 @@ const handleSubmit = (e: React.FormEvent) => {
     onChange={handleChange}
     required
   />
-  <input
+  <label className="font-semibold">Card Number</label>
+<input
   className="border p-2 rounded w-full"
-  type="password"
-  name="cvv"
-  placeholder="CVV"
-  value={formData.cvv}
+  name="cardNumber"
+  type="text"
+  placeholder="1234 5678 9012 3456"
+  value={formData.cardNumber}
   onChange={handleChange}
-  required
 />
+<small className="text-sm text-gray-500">16 digits, no spaces</small>
 
   <button
     type="submit"

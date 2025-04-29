@@ -50,13 +50,56 @@ const handleSubmit = (e: React.FormEvent) => {
 };
 
   return (
-    <form  onSubmit={handleSubmit}>
-      <h2>Payment Details</h2>
-      <input type="text" name="name" placeholder="Name on Card" />
-      <input type="text" name="cardNumber" placeholder="Card Number" />
-      <input type="text" name="expiry" placeholder="MM/YY" />
-      <input type="text" name="cvv" placeholder="CVV" />
-      <button type="submit">Pay Now</button>
-    </form>
+    <form
+  onSubmit={handleSubmit}
+  className="space-y-4 p-4 bg-white rounded shadow-md w-full max-w-md mx-auto"
+>
+  <h2 className="text-2xl font-bold text-center">Payment Form</h2>
+  <input
+    className="border p-2 rounded w-full"
+    type="text"
+    name="name"
+    placeholder="Name on Card"
+    value={formData.name}
+    onChange={handleChange}
+    required
+  />
+  <input
+    className="border p-2 rounded w-full"
+    type="text"
+    name="cardNumber"
+    placeholder="Card Number"
+    value={formData.cardNumber}
+    onChange={handleChange}
+    required
+  />
+  <input
+    className="border p-2 rounded w-full"
+    type="text"
+    name="expiry"
+    placeholder="MM/YY"
+    value={formData.expiry}
+    onChange={handleChange}
+    required
+  />
+  <input
+    className="border p-2 rounded w-full"
+    type="text"
+    name="cvv"
+    placeholder="CVV"
+    value={formData.cvv}
+    onChange={handleChange}
+    required
+  />
+  <button
+    type="submit"
+    className={`bg-green-600 text-white w-full py-2 rounded ${
+      isSubmitting ? 'opacity-60 cursor-not-allowed' : 'hover:bg-green-700'
+    }`}
+    disabled={isSubmitting}
+  >
+    {isSubmitting ? 'Processing...' : 'Pay Now'}
+  </button>
+</form>
   );
 };

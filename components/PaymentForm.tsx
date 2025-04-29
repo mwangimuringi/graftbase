@@ -1,8 +1,13 @@
-// components/forms/PaymentForm.tsx
-
-import React from 'react';
+import React, { useState } from 'react';
 
 const PaymentForm = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    cardNumber: '',
+    expiry: '',
+    cvv: ''
+  });
+
   return (
     <form>
       <h2>Payment Details</h2>

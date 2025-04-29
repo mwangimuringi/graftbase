@@ -91,6 +91,16 @@ const handleSubmit = (e: React.FormEvent) => {
     onChange={handleChange}
     required
   />
+  <input
+  className="border p-2 rounded w-full"
+  type="password"
+  name="cvv"
+  placeholder="CVV"
+  value={formData.cvv}
+  onChange={handleChange}
+  required
+/>
+
   <button
     type="submit"
     className={`bg-green-600 text-white w-full py-2 rounded ${

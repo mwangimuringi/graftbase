@@ -15,8 +15,13 @@ const PaymentForm = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log('Payment info submitted:', formData);
+  };
+
   return (
-    <form>
+    <form  onSubmit={handleSubmit}>
       <h2>Payment Details</h2>
       <input type="text" name="name" placeholder="Name on Card" />
       <input type="text" name="cardNumber" placeholder="Card Number" />
